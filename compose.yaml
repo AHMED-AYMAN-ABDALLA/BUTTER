@@ -1,5 +1,6 @@
 services:
   nginx:
+    image: ghcr.io/ahmed-ayman-abdalla/butter:latest
     build:
       context: .
       dockerfile: Dockerfile
