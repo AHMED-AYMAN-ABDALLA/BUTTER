@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>التوجيه والإرشاد الأسري · زبدة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@500;600;700&display=swap">
+<script>
+(function () { var t = 'light'; try { var p = JSON.parse(localStorage.getItem('study-prefs') || 'null'); if (p && ['light', 'warm', 'dark'].indexOf(p.theme) >= 0) t = p.theme; } catch (e) {} document.documentElement.dataset.theme = t; })();
+</script>
+<style>
+:root{--font:'Readex Pro','IBM Plex Sans Arabic',system-ui,sans-serif;--body:'IBM Plex Sans Arabic',system-ui,sans-serif;--grad:linear-gradient(120deg,#4F46E5,#3B6FE8);--gold:#E9B44C}
+:root[data-theme="light"]{--bg:#F5F6FF;--surface:#fff;--surface2:#F2F3FE;--ink:#141842;--muted:#5B6394;--line:#E3E6FA;--accent:#4F46E5;--accent-soft:#ECE9FF}
+:root[data-theme="warm"]{--bg:#FBF6EE;--surface:#FFFDF8;--surface2:#F6EEE1;--ink:#2A2118;--muted:#76675A;--line:#EADFCF;--accent:#B5552B;--accent-soft:#F7E4D8;--grad:linear-gradient(120deg,#B5552B,#D9822B)}
+:root[data-theme="dark"]{--bg:#0C1133;--surface:#151C4F;--surface2:#1A225C;--ink:#ECEEFF;--muted:#A3AADB;--line:#262E6B;--accent:#8B7BFF;--accent-soft:rgba(139,123,255,.16)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.75;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:22px 16px 60px}
+.back{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px;border:1px solid var(--line);border-radius:99px;padding:5px 13px;background:var(--surface)}
+.back b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-family:var(--font)}
+.hd{margin:22px 0 18px}
+.kick{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:2px 11px}
+h1{font-family:var(--font);font-size:clamp(26px,5vw,38px);margin:10px 0 4px;line-height:1.3}
+.hd p{margin:0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:20px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:inherit;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.thumb{height:150px;border-radius:14px;background:var(--grad);display:grid;place-items:center;position:relative;overflow:hidden}
+.thumb::after{content:"";position:absolute;inset:0;background:radial-gradient(220px 120px at 80% 0%,rgba(255,255,255,.3),transparent 70%)}
+.sheet{width:92px;height:118px;background:#fff;border-radius:6px;box-shadow:0 16px 30px -12px rgba(0,0,0,.45);transform:rotate(-4deg);display:grid;place-items:center;font-family:var(--font);font-weight:700;color:#C2264F;font-size:14px}
+.card h2{font-family:var(--font);font-size:18px;margin:0}
+.card small{color:var(--muted)}
+.go{margin-top:auto;display:inline-flex;align-self:flex-start;gap:8px;align-items:center;font-weight:700;color:#fff;background:var(--grad);border-radius:12px;padding:8px 14px;font-size:14px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="back" href="index.html"><span aria-hidden="true">→</span> <b>زبدة</b></a>
+  <header class="hd">
+    <span class="kick">مقرر حر · 3 وحدات</span>
+    <h1>التوجيه والإرشاد الأسري</h1>
+    <p>ملخصات المقرر، محفوظة في الموقع نفسه.</p>
+  </header>
+  <div class="grid">
+    <a class="card" href="free/family-midterm.pdf" target="_blank" rel="noopener">
+      <div class="thumb"><div class="sheet">PDF</div></div>
+      <div><h2>ملخص الميد</h2><small>7 صفحات</small></div>
+      <span class="go">افتح الملخص ←</span>
+    </a>
+    <a class="card" href="free/family-final.pdf" target="_blank" rel="noopener">
+      <div class="thumb"><div class="sheet">PDF</div></div>
+      <div><h2>ملخص الفاينل</h2><small>5 صفحات</small></div>
+      <span class="go">افتح الملخص ←</span>
+    </a>
+  </div>
+</main>
+</body>
+</html>

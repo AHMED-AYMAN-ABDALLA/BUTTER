@@ -1,5 +1,7 @@
 .git
 .github
 README.md
-Dockerfile
 compose.yaml
+admin.html
+**/admin.html
+**/database.rules.json

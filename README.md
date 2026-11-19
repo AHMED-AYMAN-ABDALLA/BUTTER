@@ -1,44 +1,27 @@
-# BUTTER
+# زبدة · BUTTER
 
-The Docker image is published to the GitHub Container Registry:
+منصة المذاكرة كاملة في مجلد `site/`، وكل صفحة تفتح لحالها من الجهاز (`site/index.html`).
+صفحة الأدمن خاصة: ما تنحفظ هنا ولا تدخل الصورة، والـ workflow يوقف إذا لقاها.
 
-```sh
-docker pull ghcr.io/ahmed-ayman-abdalla/butter:latest
-```
+## كيف يوصل التحديث للسيرفر
 
-Pull requests from this repository also publish a temporary image tagged with
-the pull request number, for example:
+1. أي تحديث ينرفع على `main` (من GitHub Desktop: **Commit to main** ثم **Push origin**).
+2. الـ workflow يبني صورة Docker وينشرها: `ghcr.io/ahmed-ayman-abdalla/butter:latest`.
+3. على السيرفر، Watchtower يشيّك كل 5 دقائق، ولقى صورة جديدة يسحبها ويعيد تشغيل الموقع.
 
-```sh
-docker pull ghcr.io/ahmed-ayman-abdalla/butter:pr-123
-```
-
-After the first successful workflow run, open the repository's **Packages** section
-on GitHub and set the container visibility to **Public** if the image should be
-installable without authenticating to GitHub.
-
-Run the published image on port 8080:
+## تشغيل السيرفر أول مرة
 
 ```sh
-docker run --name butter -d -p 8080:80 ghcr.io/ahmed-ayman-abdalla/butter:latest
+docker compose up -d
 ```
 
-Open <http://localhost:8080> to view the site. Stop and remove the container with:
+الموقع على المنفذ 8080. بعد أول تشغيل ناجح للـ workflow، افتح **Packages** في الريبو
+وخل الصورة **Public** عشان السيرفر يسحبها بدون تسجيل دخول.
+
+## تجربة محلية
 
 ```sh
-docker rm --force butter
+docker build -t butter . && docker run --rm -p 8080:80 butter
 ```
 
-## Run with Docker Compose
-
-Build and start the Nginx web server locally:
-
-```sh
-docker compose up --build
-```
-
-Open <http://localhost:8080> to view the site. Stop the service with:
-
-```sh
-docker compose down
-```
+ثم افتح <http://localhost:8080>.

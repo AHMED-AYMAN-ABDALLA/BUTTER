@@ -1,0 +1,5 @@
+# the admin page is private: it is uploaded on its own, never kept here
+admin.html
+**/admin.html
+database.rules.json
+**/database.rules.json
