@@ -1240,6 +1240,24 @@ html[data-ui="ar"] .bartools .menu{right:auto!important;left:0!important}
 .mjsrc{margin:.2rem 0 0;font-size:.74rem;color:var(--muted);line-height:1.7}
 .mjsrc a{color:var(--accent)}
 @media (max-width:560px){.mjsum dl{grid-template-columns:1fr 1fr}.mjcols{grid-template-columns:1fr 1fr}.mjcta .btn{width:100%}}
+
+/* ---------- quick course search ---------- */
+.srch{position:relative;margin:1rem 0 1.1rem}
+.srch input{width:100%;box-sizing:border-box;font:inherit;font-size:1rem;padding:.85rem 2.9rem;border-radius:16px;border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line,#ddd));background:var(--card,#fff);color:inherit;box-shadow:0 6px 20px -14px color-mix(in srgb,var(--accent) 60%,transparent);transition:border-color .15s,box-shadow .15s}
+.srch input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent)}
+.srch input::placeholder{color:var(--muted)}
+.srchic{position:absolute;inset-inline-start:1rem;top:50%;transform:translateY(-50%);width:1.2rem;height:1.2rem;color:var(--muted);pointer-events:none}
+.srchic svg{width:100%;height:100%;display:block}
+.srchres{position:absolute;inset-inline:0;top:calc(100% + .4rem);z-index:30;padding:.35rem;border-radius:16px;border:1px solid var(--line,#ddd);background:var(--card,#fff);box-shadow:0 18px 40px -18px rgba(20,20,60,.35);max-height:min(60vh,26rem);overflow:auto}
+.srchit{display:flex;align-items:center;gap:.7rem;width:100%;text-align:start;font:inherit;color:inherit;background:none;border:0;border-radius:12px;padding:.6rem .7rem;cursor:pointer}
+.srchit i{flex:none;width:.6rem;height:.6rem;border-radius:50%;background:var(--c)}
+.srchit span{flex:1;min-width:0;display:flex;flex-direction:column}
+.srchit b{font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.srchit small{font-size:.78rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;unicode-bidi:plaintext;text-align:end}
+.srchit em{flex:none;font-style:normal;font-size:.78rem;font-weight:700;padding:.15rem .5rem;border-radius:999px;background:color-mix(in srgb,var(--c) 16%,transparent);unicode-bidi:isolate}
+.srchit:hover,.srchit.on{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.srchnone{margin:0;padding:.8rem;color:var(--muted);font-size:.9rem;text-align:center}
+@media (max-width:560px){.srch input{font-size:16px;padding:.8rem 2.7rem}}
 </style>
 </head>
 
@@ -1357,7 +1375,7 @@ const SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-w
 const modeBtn = () => { const day = PREFS.theme === 'light', t = day ? T('الوضع الليلي', 'Night mode') : T('الوضع النهاري', 'Day mode'); return `<button class="gear mode" data-act="mode" aria-label="${t}" title="${t}">${day ? MOON : SUN}</button>`; };
 const LANG_SHORT = { both: 'ع + EN', ar: 'عربي', en: 'EN' };
 const langBtn = () => `<span class="langwrap"><button class="gear lang" data-act="langmenu" aria-expanded="${!!S.lmenu}" aria-label="${T('لغة الشرح', 'Language')}" title="${T('لغة الشرح', 'Language')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg><span>${LANG_SHORT[PREFS.lang]}</span></button>${S.lmenu ? `<div class="menu lmenu" role="menu" dir="${DIR()}">${OPTIONS.lang.map(([v, t]) => `<button role="menuitemradio" aria-checked="${PREFS.lang === v}" class="${PREFS.lang === v ? 'on' : ''}" data-set="lang:${v}">${t}<small>${{ both: T('الشرح بالعربي والإنجليزي', 'Arabic and English explanations'), ar: T('الشرح بالعربي فقط', 'Arabic explanations only'), en: T('English explanations and interface', 'English explanations and interface') }[v]}</small></button>`).join('')}</div>` : ''}</span>`;
-const barHTML = left => `<div class="bar">${left}<span class="bartools">${coopBtn()}${Inbox.barBtn()}${langBtn()}${modeBtn()}<span class="menuwrap"><button class="gear" data-act="menu" aria-expanded="${S.menu}" aria-label="Reading settings" title="Settings">${GEAR}</button>${S.menu ? menuHTML() : ''}</span></span></div>`;
+const barHTML = left => `<div class="bar">${left}<span class="bartools">${planBtn()}${coopBtn()}${Inbox.barBtn()}${langBtn()}${modeBtn()}<span class="menuwrap"><button class="gear" data-act="menu" aria-expanded="${S.menu}" aria-label="Reading settings" title="Settings">${GEAR}</button>${S.menu ? menuHTML() : ''}</span></span></div>`;
 function applySetting(key, val) {
   PREFS[key] = val;
   savePrefs(); applyPrefs();
@@ -1533,6 +1551,7 @@ function landingHTML() {
   if (cur === 'free' && !freeItems.length && !freeSoon.length) cur = 'all';
   const lvName = L => T(`المستوى ${L.ord}`, `${LV_EN[L.n - 1]} level`);
   const chip = (v, label, has) => `<button type="button" class="lvchip${cur === v ? ' on' : ''}${has ? '' : ' empty'}" data-act="level" data-lv="${v}" aria-pressed="${cur === v}">${label}</button>`;
+  window.__CSRCH = metas.map(m => ({ id: m.id, ar: m.ar, en: m.en, code: (planOf[m.id] || {}).code || '' }));
   const chips = `<nav class="lvnav" aria-label="${T('المستويات', 'Levels')}">${chip('my', T('★ موادي', '★ My courses'), my.length)}${chip('all', T('كل المستويات', 'All levels'), 1)}${levels.map(L => chip(String(L.n), T(`المستوى ${L.n}`, `Level ${L.n}`), L.items.length)).join('')}${chip('el', T('المواد الاختيارية', 'Electives'), elItems.length)}${genItems.length ? chip('gen', T('المواد العامة', 'General courses'), genItems.length) : ''}${freeItems.length + freeSoon.length ? chip('free', T('المقررات الحرة', 'Free courses'), freeItems.length + freeSoon.length) : ''}${others.length ? chip('other', T('مواد أخرى', 'Other courses'), 1) : ''}</nav>`;
   const head = (n, title, sub) => `<div class="lvhead"><span class="lvnum">${n}</span><div><h2>${title}</h2>${sub ? `<p>${sub}</p>` : ''}</div></div>`;
   const count = k => UI_EN() ? (k === 1 ? '1 course' : `${k} courses`) : (k === 1 ? 'مادة وحدة' : k === 2 ? 'مادتين' : `${k} مواد`);
@@ -1597,7 +1616,7 @@ function landingHTML() {
     <h1 dir="${DIR()}">${T('أهلًا', 'Hi,')} ${esc(Stats.name())}</h1>${starsHTML()}
     <p class="lead" dir="${DIR()}">${T('وش تبي تذاكر اليوم؟', 'What would you like to study today?')}</p>
     ${badgesHTML()}
-    ${planCardHTML()}${Majors.cardHTML()}
+    ${planCardHTML()}${Majors.cardHTML()}${CSearch.html()}
     <div class="levels" dir="${DIR()}" lang="${UI_EN() ? 'en' : 'ar'}">${chips}${body}</div>`;
 }
 /* achievements the admin gave: a congratulation card for new ones, then the full collection */
@@ -4190,13 +4209,14 @@ const Plan = (() => {
 /* frame pages report quiz results to the plan too */
 { const h0 = window.__extHook; window.__extHook = (t, d) => { h0(t, d); try { Plan.onExt(t, d); } catch (e) {} }; }
 function coopBtn() {
-  return `<button type="button" class="gear plbtn coopbtn" onclick="location.href='coop.html'" aria-label="${T('التدريب التعاوني', 'Cooperative training')}" title="${T('التدريب التعاوني', 'Cooperative training')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18M10.5 12.5v1.5h3v-1.5"/></svg><span>${T('التدريب', 'Training')}</span></button>`;
+  return `<button type="button" class="gear plbtn coopbtn" onclick="location.href='coop.html'" aria-label="${T('التدريب التعاوني', 'Cooperative training')}" title="${T('التدريب التعاوني', 'Cooperative training')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18M10.5 12.5v1.5h3v-1.5"/></svg><span>${T('التدريب التعاوني', 'Co-op training')}</span></button>`;
 }
 function planBtn() {
   const on = S.screen === 'plan';
   return `<button class="gear plbtn${on ? ' on' : ''}" data-pl="toplan" aria-label="${T('خطتي', 'My plan')}" title="${T('خطتي', 'My plan')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17M8 14l2 2 4-4"/></svg><span>${T('خطتي', 'My plan')}</span></button>`;
 }
 function planCardHTML() {
+  return '';   // the «نظّم مذاكرتك مع خطتي» card is no longer shown on the home page (removed on request)
   if (Plan.has()) return '';
   return `<section class="plcta" dir="${DIR()}"><div><b>${T('نظّم مذاكرتك مع «خطتي»', 'Organize your study with "My plan"')}</b><p>${T('اختر موادك ومواعيد اختباراتك، ونبني لك جدول من دروس المنصة ونقيس استعدادك من إجاباتك.', 'Pick your courses and exam dates; we build a schedule from the platform lessons and measure your readiness from your answers.')}</p></div><button type="button" class="btn pri" data-pl="toplan">${T('ابدأ خطتي', 'Start my plan')}</button></section>`;
 }
@@ -4336,27 +4356,26 @@ const Inbox = (() => {
     <button type="button" class="ctcard" data-ct="req"><span class="cti">${IC.book}</span><span><b>${T('اطلب مادة', 'Request a course')}</b><small>${T('قول لي وش المادة اللي تبيها تنضاف للمنصة', 'Tell me which course you want on the platform')}</small></span></button></section>`;
   const reqBtn = x => `<button type="button" class="lvreq" data-ct="req" data-code="${esc(x.code)}">${T('اطلبها', 'Request it')}</button>`;
   /* top bar, next to «خطتي» */
-  const barBtn = () => `<button type="button" class="gear plbtn ctbtn${S2 && S2.k === 'contact' ? ' on' : ''}" data-ct="contact" aria-label="${T('تواصل معي', 'Contact me')}" title="${T('تواصل معي', 'Contact me')}">${IC.chat}<span>${T('تواصل', 'Contact')}</span></button>`
-    + `<button type="button" class="gear plbtn ctbtn rqbtn${S2 && S2.k === 'req' ? ' on' : ''}" data-ct="req" aria-label="${T('اطلب مادة', 'Request a course')}" title="${T('اطلب مادة', 'Request a course')}">${IC.book}<span>${T('اطلب مادة', 'Request a course')}</span></button>`;
+  const barBtn = () => `<button type="button" class="gear plbtn ctbtn${S2 && S2.k === 'contact' ? ' on' : ''}" data-ct="contact" aria-label="${T('تواصل معي', 'Contact me')}" title="${T('تواصل معي', 'Contact me')}">${IC.chat}<span>${T('تواصل', 'Contact')}</span></button>`;   // «اطلب مادة» is no longer in the top bar (still on the home page and on each course)
   return { open, close, cardsHTML, reqBtn, barBtn };
 })();
 
 /* ===================== «طلب تخصص جديد» ===================== */
 const Majors = (() => {
-  /* units.imamu.edu.sa: colleges and their majors */
+  /* imamu.edu.sa/ar/academic-programs: colleges and their bachelor programmes (checked 2026-11-20) */
   const BA = [
     ['كلية علوم الحاسب والمعلومات', 'College of Computer and Information Sciences', 'cpu', [['علوم الحاسب', 'Computer Science'], ['نظم المعلومات', 'Information Systems'], ['تقنية المعلومات', 'Information Technology', 'on']]],
     ['كلية الهندسة', 'College of Engineering', 'gear', [['الهندسة الكهربائية', 'Electrical Engineering'], ['الهندسة المدنية', 'Civil Engineering'], ['الهندسة الميكانيكية', 'Mechanical Engineering'], ['الهندسة الصناعية', 'Industrial Engineering'], ['الهندسة المعمارية', 'Architectural Engineering'], ['الهندسة الكيميائية', 'Chemical Engineering']]],
     ['كلية العلوم', 'College of Science', 'flask', [['الأحياء', 'Biology'], ['الفيزياء', 'Physics'], ['الكيمياء', 'Chemistry'], ['الرياضيات التطبيقية', 'Applied Mathematics'], ['الإحصاء التطبيقي', 'Applied Statistics'], ['الإكتوارية والرياضيات المالية', 'Actuarial and Financial Mathematics'], ['العلوم البيئية', 'Environmental Sciences'], ['المختبرات الكيميائية', 'Chemical Laboratories']]],
-    ['كلية الأعمال', 'College of Business', 'chart', [['المحاسبة', 'Accounting'], ['إدارة الأعمال', 'Business Administration'], ['التأمين وإدارة المخاطر', 'Insurance and Risk Management'], ['الاقتصاد', 'Economics'], ['التمويل والاستثمار', 'Finance and Investment'], ['الأعمال المصرفية', 'Banking'], ['التسويق', 'Marketing']]],
+    ['كلية الأعمال', 'College of Business', 'chart', [['الاقتصاد', 'Economics'], ['المحاسبة', 'Accounting'], ['المالية (التمويل والاستثمار)', 'Finance (Finance and Investment)'], ['المالية (الأعمال المصرفية)', 'Finance (Banking)'], ['التأمين وإدارة المخاطر', 'Insurance and Risk Management'], ['إدارة الأعمال', 'Business Administration'], ['التسويق', 'Marketing']]],
     ['كلية الطب', 'College of Medicine', 'heart', [['الطب والجراحة', 'Medicine and Surgery']]],
     ['كلية التمريض', 'College of Nursing', 'plus', [['التمريض', 'Nursing']]],
     ['كلية الإعلام والاتصال', 'College of Media and Communication', 'mic', [['العلاقات العامة', 'Public Relations'], ['الإعلان والاتصال التسويقي', 'Advertising and Marketing Communication'], ['الصحافة والإعلام الجديد', 'Journalism and New Media'], ['الإذاعة والتلفزيون', 'Radio and Television'], ['السينما والمسرح', 'Cinema and Theatre'], ['الجرافيكس والوسائط المتعددة', 'Graphics and Multimedia']]],
     ['كلية اللغات والترجمة', 'College of Languages and Translation', 'globe', [['اللغة الإنجليزية وآدابها', 'English Language and Literature']]],
     ['كلية العلوم الاجتماعية', 'College of Social Sciences', 'people', [['التاريخ والحضارة', 'History and Civilization'], ['الجغرافيا', 'Geography'], ['علم النفس', 'Psychology'], ['الاجتماع والخدمة الاجتماعية', 'Sociology and Social Work']]],
-    ['كلية اللغة العربية', 'College of Arabic Language', 'pen', [['اللغة العربية', 'Arabic Language']]],
+    ['كلية اللغة العربية', 'College of Arabic Language', 'pen', [['اللغة العربية', 'Arabic Language'], ['تطبيقات اللغة العربية وحوسبتها', 'Arabic Language Applications and Computing'], ['لغة القانون والأنظمة', 'Language of Law and Regulations'], ['اللغة الإعلامية', 'Media Language']]],
     ['كلية الشريعة', 'College of Sharia', 'book', [['الشريعة', 'Sharia']]],
-    ['كلية أصول الدين والدعوة', 'College of Usul al-Din and Dawah', 'book', [['أصول الدين', 'Usul al-Din']]],
+    ['كلية أصول الدين والدعوة', 'College of Usul al-Din and Dawah', 'book', [['القرآن وعلومه', 'The Quran and Its Sciences'], ['السنة وعلومها', 'The Sunnah and Its Sciences'], ['العقيدة والمذاهب المعاصرة', 'Creed and Contemporary Doctrines']]],
   ];
   /* the free diplomas of the Applied College, by branch: [major, degree] (m: intermediate, a: associate) */
   const DIP = [
@@ -4436,7 +4455,6 @@ const Majors = (() => {
         <label class="ctf">${T('وسيلة تواصل (اختياري)', 'How to reach you (optional)')}<input name="contact" maxlength="${MAX.contact}" dir="ltr" placeholder="${T('إيميل أو رقم أو حساب', 'Email, number or handle')}"></label>
         <p class="ctrr" role="alert">${esc(M.err)}</p>
         <div class="ctacts"><button type="button" class="btn" data-mj="close">${T('إلغاء', 'Cancel')}</button><button type="submit" class="btn pri">${IC.send} ${T('أرسل الطلب على تلجرام', 'Send the request on Telegram')}</button></div>
-        <p class="mjsrc">${T('القائمة من دليل الأقسام في <a href="https://units.imamu.edu.sa/" target="_blank" rel="noopener">units.imamu.edu.sa</a>. وجود التخصص في القائمة ما يعني بالضرورة إنه يستقبل طلاب في القبول الحالي.', 'The list is from <a href="https://units.imamu.edu.sa/" target="_blank" rel="noopener">units.imamu.edu.sa</a>. A listed major is not necessarily open in the current admission.')}</p>
       </form>`;
   }
   function paint(focus) {
@@ -4510,6 +4528,56 @@ const Majors = (() => {
   document.addEventListener('submit', e => { if (e.target.closest && e.target.closest('#mjbox')) { e.preventDefault(); submit(e.target); } }, true);
   const cardHTML = () => `<section class="mjcta" dir="${DIR()}"><span class="mjctai">${IC.cap}</span><div><b>${T('طلب تخصص جديد', 'Request a new major')}</b><p>${T('من تخصص ثاني؟ اختر كليتك وتخصصك (بكالوريوس أو دبلوم أو ماجستير) واطلب موادك تنضاف للمنصة.', 'From another major? Pick your college and major (bachelor, diploma or master) and ask for your courses.')}</p></div><button type="button" class="btn pri" data-mj="open">${T('اطلب تخصصك', 'Request your major')}</button></section>`;
   return { open, close, cardHTML };
+})();
+
+/* ===================== quick course search (home page) ===================== */
+const CSearch = (() => {
+  const norm = t => String(t || '').toLowerCase().replace(/[ً-ْـ]/g, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/\s+/g, ' ').trim();
+  const flat = t => norm(t).replace(/\s/g, '');
+  const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>';
+  let q = '', sel = 0;
+  const find = text => {
+    const n = norm(text), f = flat(text);
+    if (!n) return [];
+    const words = n.split(' ');
+    return (window.__CSRCH || []).map(c => {
+      const code = c.code ? [c.code, codeT(c.code)] : [];
+      const hay = norm([c.ar, c.en, ...code].join(' ')), codes = code.map(flat);
+      let score = 0;
+      if (codes.some(k => k === f)) score = 4;
+      else if (codes.some(k => k.includes(f))) score = 3;
+      else if (norm(c.ar).startsWith(n) || norm(c.en).startsWith(n)) score = 2;
+      else if (words.every(w => hay.includes(w))) score = 1;
+      return { c, score };
+    }).filter(x => x.score).sort((a, b) => b.score - a.score).slice(0, 8).map(x => x.c);
+  };
+  const resHTML = list => !q.trim() ? '' : list.length
+    ? list.map((c, i) => `<button type="button" class="srchit${i === sel ? ' on' : ''}" data-srch="${esc(c.id)}" role="option" aria-selected="${i === sel}" style="--c:${COURSE_COLORS[c.id] || 'var(--accent)'}"><i aria-hidden="true"></i><span><b>${esc(UI_EN() ? c.en : c.ar)}</b><small>${esc(UI_EN() ? c.ar : c.en)}</small></span>${c.code ? `<em>${esc(codeT(c.code))}</em>` : ''}</button>`).join('')
+    : `<p class="srchnone">${T('ما لقيت مادة بهالاسم أو الرمز', 'No course matches that name or code')}</p>`;
+  const paint = () => {
+    const box = document.getElementById('csrchres'); if (!box) return;
+    const list = find(q); if (sel >= list.length) sel = 0;
+    box.innerHTML = resHTML(list); box.hidden = !q.trim();
+    const inp = document.getElementById('csrch'); if (inp) inp.setAttribute('aria-expanded', String(!!q.trim()));
+  };
+  const go = id => { q = ''; sel = 0; selectCourse(id); };
+  document.addEventListener('input', e => { if (e.target.id !== 'csrch') return; q = e.target.value; sel = 0; paint(); });
+  document.addEventListener('keydown', e => {
+    if (e.target.id !== 'csrch') return;
+    const list = find(q);
+    if (e.key === 'ArrowDown' && list.length) { e.preventDefault(); sel = (sel + 1) % list.length; paint(); }
+    else if (e.key === 'ArrowUp' && list.length) { e.preventDefault(); sel = (sel - 1 + list.length) % list.length; paint(); }
+    else if (e.key === 'Enter' && list.length) { e.preventDefault(); go(list[sel].id); }
+    else if (e.key === 'Escape') { q = ''; e.target.value = ''; paint(); }
+  });
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('[data-srch]');
+    if (b) { e.preventDefault(); go(b.getAttribute('data-srch')); return; }
+    if (!e.target.closest || !e.target.closest('.srch')) { const box = document.getElementById('csrchres'); if (box && !box.hidden) box.hidden = true; }
+  });
+  document.addEventListener('focusin', e => { if (e.target.id === 'csrch' && q.trim()) paint(); });
+  const html = () => `<div class="srch" role="search" dir="${DIR()}"><span class="srchic">${ICON}</span><input id="csrch" type="search" autocomplete="off" spellcheck="false" value="${esc(q)}" placeholder="${T('ابحث عن مادة بالاسم أو الرمز… مثل «شبكات» أو 1322', 'Search a course by name or code… e.g. "networks" or 1322')}" aria-label="${T('ابحث عن مادة', 'Search a course')}" aria-controls="csrchres" aria-expanded="false" role="combobox"><div class="srchres" id="csrchres" role="listbox" hidden></div></div>`;
+  return { html, find };
 })();
 /* ---------- 3.11 Init ---------- */
 applyPrefs();
