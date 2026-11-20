@@ -11649,19 +11649,70 @@ const Stats = (() => {
   const validSlide = n => Number.isInteger(n) && n >= 1 && n <= 99;
   const validQ = s => typeof s === 'string' && /^ch[0-9]{1,2}s[0-9]{1,2}q[0-9]{1,2}$/.test(s);
   const read = k => { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } };
+  /* which device this is, so the admin page counts a returning device once (see add_device_id.py) */
+  const Ident = (() => {
+    const rot = (x, n) => (x >>> n) | (x << (32 - n));
+    const primes = []; for (let p = 2; primes.length < 64; p++) if (primes.every(q => p % q)) primes.push(p);
+    const frac = x => (x - Math.floor(x)) * 4294967296 >>> 0;
+    const K = primes.map(p => frac(Math.cbrt(p))), H0 = primes.slice(0, 8).map(p => frac(Math.sqrt(p)));
+    function sha256(bytes) {
+      const l = bytes.length, n = ((l + 9 + 63) >> 6) << 6, m = new Uint8Array(n), dv = new DataView(m.buffer), w = new Uint32Array(64);
+      m.set(bytes); m[l] = 0x80; dv.setUint32(n - 4, (l * 8) >>> 0); dv.setUint32(n - 8, Math.floor(l / 536870912));
+      const h = H0.slice();
+      for (let o = 0; o < n; o += 64) {
+        for (let i = 0; i < 16; i++) w[i] = dv.getUint32(o + i * 4);
+        for (let i = 16; i < 64; i++) {
+          const a = w[i - 15], b = w[i - 2];
+          w[i] = (w[i - 16] + (rot(a, 7) ^ rot(a, 18) ^ (a >>> 3)) + w[i - 7] + (rot(b, 17) ^ rot(b, 19) ^ (b >>> 10))) | 0;
+        }
+        let [a, b, c, d, e, f, g, k] = h;
+        for (let i = 0; i < 64; i++) {
+          const t1 = (k + (rot(e, 6) ^ rot(e, 11) ^ rot(e, 25)) + ((e & f) ^ (~e & g)) + K[i] + w[i]) | 0;
+          const t2 = ((rot(a, 2) ^ rot(a, 13) ^ rot(a, 22)) + ((a & b) ^ (a & c) ^ (b & c))) | 0;
+          k = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;
+        }
+        [a, b, c, d, e, f, g, k].forEach((v, i) => { h[i] = (h[i] + v) | 0; });
+      }
+      const out = new Uint8Array(32); h.forEach((v, i) => new DataView(out.buffer).setUint32(i * 4, v >>> 0)); return out;
+    }
+    const b64u = b => btoa(String.fromCharCode(...b)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    const norm = s => String(s || '').normalize('NFKC').replace(/[ً-ٰٟـ]/g, '').replace(/[أإآٱ]/g, 'ا')
+      .replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي').toLowerCase().replace(/\s+/g, ' ').trim();
+    // traits of the device itself that stay the same across browsers, page zoom and app updates
+    function traits() {
+      const ua = navigator.userAgent || '';
+      const os = /iPhone/.test(ua) ? 'iphone' : /iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? 'ipad'
+        : /Android/.test(ua) ? 'android' : /Windows/.test(ua) ? 'windows' : /Mac/.test(ua) ? 'mac' : /CrOS/.test(ua) ? 'cros' : /Linux/.test(ua) ? 'linux' : 'other';
+      const r = window.devicePixelRatio || 1, sw = Math.round((screen.width || 0) * r), sh = Math.round((screen.height || 0) * r);
+      let tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+      return [os, Math.min(sw, sh), Math.max(sw, sh), tz, navigator.hardwareConcurrency || 0, navigator.maxTouchPoints > 0 ? 1 : 0].join('|');
+    }
+    let memo = '';
+    function key() {
+      if (memo) return memo;
+      try { memo = b64u(sha256(new TextEncoder().encode('zubda-device-1|' + traits()))); } catch (e) { memo = ''; }
+      return memo;
+    }
+    return { key, sha256, traits };
+  })();
+  const COOKIE = 'zb_id';
+  const cookieId = () => { try { const m = /(?:^|;\s*)zb_id=([A-Za-z0-9_-]{22})(?:;|$)/.exec(document.cookie || ''); return m ? m[1] : ''; } catch (e) { return ''; } };
+  const saveCookie = id => { try { document.cookie = `${COOKIE}=${id}; Max-Age=63072000; Path=/; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`; } catch (e) {} };
+
 
   let st = read(KEY);
   if (!st || !validId(st.id) || typeof st.f !== 'object' || !st.f) {
     // keep the same person if an older version of these pages already gave them an id and a name
     const old = [read('iot-user-v1'), read('sr-stats-v1')].find(o => o && validId(o.id));
-    st = { id: old ? old.id : newId(), f: {}, name: old && typeof old.name === 'string' ? old.name : '', banned: false, r: {}, b: {} };
+    const ck = cookieId();
+    st = { id: ck || (old ? old.id : newId()), f: {}, name: old && typeof old.name === 'string' ? old.name : '', banned: false, r: {}, b: {} };
   }
   if (typeof st.r !== 'object' || !st.r) st.r = {};
   if (typeof st.b !== 'object' || !st.b) st.b = {};
   if (!Array.isArray(st.bd)) st.bd = [];
   if (typeof st.name !== 'string' || !NameCheck.check(st.name).ok) st.name = '';
   st.banned = st.banned === true;
-  const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+  const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} saveCookie(st.id); };
   persist();
   const me = k => `people/${st.id}/${k}`;
   const mc = k => `people/${st.id}/c/${COURSE}/${k}`;
@@ -11744,12 +11795,12 @@ const Stats = (() => {
     checkBanned().then(b => { if (!b) { loadBadges(); loadBadgeCounts(); } if (!b) loadBannedWords().then(() => { if (st.name && !st.f.n) setName(st.name).then(r => { if (r.ok && onChange) onChange(); }); }); });
     if (once('study-session')) queue(async () => {
       if (!st.f.v) {
-        const r = await send({ [me('first')]: NOW, [me('last')]: NOW, [me('visits')]: INC, [me('dev')]: device() });
+        const r = await send({ [me('first')]: NOW, [me('last')]: NOW, [me('visits')]: INC, [me('dev')]: device(), ...(Ident.key() ? { [me('d')]: Ident.key() } : {}) });
         if (r === 'ok') { st.f.v = 1; persist(); return; }
         if (r !== 'denied') return;
         st.f.v = 1; persist();
       }
-      await send({ [me('last')]: NOW, [me('visits')]: INC, [me('dev')]: device() });
+      await send({ [me('last')]: NOW, [me('visits')]: INC, [me('dev')]: device(), ...(Ident.key() ? { [me('d')]: Ident.key() } : {}) });
     });
   }
   // called when the person opens a course (once per course per browser session)
