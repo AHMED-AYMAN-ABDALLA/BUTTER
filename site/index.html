@@ -1385,7 +1385,7 @@ const SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-w
 const modeBtn = () => { const day = PREFS.theme === 'light', t = day ? T('الوضع الليلي', 'Night mode') : T('الوضع النهاري', 'Day mode'); return `<button class="gear mode" data-act="mode" aria-label="${t}" title="${t}">${day ? MOON : SUN}</button>`; };
 const LANG_SHORT = { both: 'ع + EN', ar: 'عربي', en: 'EN' };
 const langBtn = () => `<span class="langwrap"><button class="gear lang" data-act="langmenu" aria-expanded="${!!S.lmenu}" aria-label="${T('لغة الشرح', 'Language')}" title="${T('لغة الشرح', 'Language')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg><span>${LANG_SHORT[PREFS.lang]}</span></button>${S.lmenu ? `<div class="menu lmenu" role="menu" dir="${DIR()}">${OPTIONS.lang.map(([v, t]) => `<button role="menuitemradio" aria-checked="${PREFS.lang === v}" class="${PREFS.lang === v ? 'on' : ''}" data-set="lang:${v}">${t}<small>${{ both: T('الشرح بالعربي والإنجليزي', 'Arabic and English explanations'), ar: T('الشرح بالعربي فقط', 'Arabic explanations only'), en: T('English explanations and interface', 'English explanations and interface') }[v]}</small></button>`).join('')}</div>` : ''}</span>`;
-const barHTML = left => `<div class="bar">${left}<span class="bartools">${planBtn()}${coopBtn()}${Inbox.barBtn()}${langBtn()}${modeBtn()}<span class="menuwrap"><button class="gear" data-act="menu" aria-expanded="${S.menu}" aria-label="Reading settings" title="Settings">${GEAR}</button>${S.menu ? menuHTML() : ''}</span></span></div>`;
+const barHTML = left => `<div class="bar">${left}<span class="bartools">${planBtn()}${careerBtn()}${coopBtn()}${Inbox.barBtn()}${langBtn()}${modeBtn()}<span class="menuwrap"><button class="gear" data-act="menu" aria-expanded="${S.menu}" aria-label="Reading settings" title="Settings">${GEAR}</button>${S.menu ? menuHTML() : ''}</span></span></div>`;
 function applySetting(key, val) {
   PREFS[key] = val;
   savePrefs(); applyPrefs();
@@ -4269,6 +4269,9 @@ const Plan = (() => {
 
 /* frame pages report quiz results to the plan too */
 { const h0 = window.__extHook; window.__extHook = (t, d) => { h0(t, d); try { Plan.onExt(t, d); } catch (e) {} }; }
+function careerBtn() {
+  return `<button type="button" class="gear plbtn carbtn" onclick="location.href='career.html'" aria-label="${T('مساري المهني', 'My career path')}" title="${T('مساري المهني', 'My career path')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2"/><path d="M8 19h7a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h9"/><path d="m15.5 2.5 2.5 2.5-2.5 2.5"/></svg><span>${T('مساري المهني', 'My career')}</span></button>`;
+}
 function coopBtn() {
   return `<button type="button" class="gear plbtn coopbtn" onclick="location.href='coop.html'" aria-label="${T('التدريب التعاوني', 'Cooperative training')}" title="${T('التدريب التعاوني', 'Cooperative training')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18M10.5 12.5v1.5h3v-1.5"/></svg><span>${T('التدريب التعاوني', 'Co-op training')}</span></button>`;
 }
