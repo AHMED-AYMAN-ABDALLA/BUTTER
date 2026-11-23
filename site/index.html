@@ -2300,7 +2300,6 @@ function landingHTML() {
     <h1 dir="${DIR()}">${T('أهلًا', 'Hi,')} ${esc(Stats.name())}</h1>${starsHTML()}
     <p class="lead" dir="${DIR()}">${T('وش تبي تذاكر اليوم؟', 'What would you like to study today?')}</p>
     ${badgesHTML()}
-    ${Dates.cardHTML()}
     ${planCardHTML()}${Majors.cardHTML()}${CSearch.html()}
     <div class="levels" dir="${DIR()}" lang="${UI_EN() ? 'en' : 'ar'}">${chips}${body}</div>`;
 }
@@ -5341,8 +5340,7 @@ const Dates = (() => {
             <div class="dtaddc"><select id="dtpc" aria-label="${T('مادة من المنصة', 'A platform course')}"><option value="">${T('+ مادة من المنصة', '+ Platform course')}</option>${COURSE_META.filter(m => !m.parent && !getMy().includes(m.id)).map(m => `<option value="${m.id}">${esc(T(m.ar, m.en))}</option>`).join('')}</select>
               <span class="dtcus"><input id="dtcc" maxlength="60" placeholder="${T('أو اكتب اسم مادة ثانية', 'or type another course')}"><button type="button" class="btn" data-dt="addc">${T('أضف', 'Add')}</button></span></div>
           </section>
-          <div class="dtsw"><label class="dthome"><input type="checkbox" data-dth="home" ${D.hide ? '' : 'checked'}><span></span>${T('اعرض مواعيدي في الصفحة الرئيسية', 'Show my dates on the home page')}</label>
-          <label class="dthome"><input type="checkbox" data-dth="alert" ${D.quiet ? '' : 'checked'}><span></span>${T('نبّهني بمواعيد هالأسبوع كل ما أفتح الموقع', 'Remind me of this week\'s dates whenever I open the site')}</label></div>
+          <div class="dtsw"><label class="dthome"><input type="checkbox" data-dth="alert" ${D.quiet ? '' : 'checked'}><span></span>${T('نبّهني بمواعيد هالأسبوع كل ما أفتح الموقع', 'Remind me of this week\'s dates whenever I open the site')}</label></div>
         </aside>
       </div>
       <p class="dtnote">${T('مواعيدك محفوظة في متصفحك على هذا الجهاز.', 'Your dates are kept in this browser on this device.')}</p>
