@@ -1814,6 +1814,90 @@ html:not([data-ui="en"]) .dtcd span{direction:rtl;unicode-bidi:plaintext}
   .dt2{grid-template-columns:1fr}
   .dta{padding-inline-start:0;justify-content:space-between}
 }
+
+/* ---- the page: wider, two columns (deadlines | form + courses) ---- */
+@media (min-width:1000px){
+  .wrap:has(.dtpage){max-width:72rem}
+  .dtcols{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(20rem,1fr);gap:1.25rem;align-items:start}
+  .dtside .dtform,.dtside .dtterm{margin-top:0}
+}
+.dtcols{margin-top:1rem}
+.dtmain{min-width:0}
+.dtside{min-width:0;display:flex;flex-direction:column;gap:1rem}
+.dtside .dtform,.dtside .dtterm,.dtside .dthome{margin:0}
+.dtsh{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem}
+.dtsh h2{margin:0;font-size:1.08rem}
+.dtsh h2 small{font-size:.75em;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:.05rem .5rem;border-radius:99px;margin-inline-start:.2rem}
+.dtnew{display:inline-flex;align-items:center;gap:.3rem}
+.dtnew svg{width:.95rem;height:.95rem}
+.dtmain .dttabs{margin:0 0 .5rem}
+.dtmain .dtempty{padding:2.2rem 1rem}
+.dtrr{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:.3rem}
+.dtcd2{font-size:.74rem;font-weight:700;color:var(--muted)}
+.dtcd2 svg{width:.8rem;height:.8rem}
+/* hero a little lower */
+.dthero{padding:.85rem 1.15rem;border-radius:20px}
+.dthero h1{font-size:1.3rem;margin:.25rem 0 .1rem}
+.dthero .dtseg span{min-width:3.4rem;padding:.35rem .25rem .3rem;border-radius:12px}
+.dthero .dtseg b{font-size:1.3rem}
+/* form: same heights and corners everywhere */
+.dtform{gap:.8rem;padding:1.1rem}
+.dtf input,.dtf select,.dtaddc select,.dtcus input{height:2.75rem;padding:0 .8rem;border-radius:12px;box-sizing:border-box;background:var(--surface)}
+.dtf input[type=date],.dtf input[type=time]{direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+html[data-ui="en"] .dtf input[type=date],html[data-ui="en"] .dtf input[type=time]{text-align:left}
+.dtf input[type=date]::-webkit-datetime-edit,.dtf input[type=time]::-webkit-datetime-edit{padding:0}
+/* the empty date shows our own Arabic hint (Chrome's own placeholder comes out reversed in RTL) */
+.dtin{position:relative;display:block}
+.dtin input{width:100%;cursor:pointer}
+.dtph{position:absolute;inset-block:0;right:2.6rem;display:none;align-items:center;font-style:normal;font-weight:400;color:var(--muted);pointer-events:none}
+.dtin input:invalid:not(:focus)::-webkit-datetime-edit{color:transparent}
+.dtin input:invalid:not(:focus)+.dtph{display:flex}
+html[data-ui="en"] .dtph{right:auto;left:.85rem}
+.dtf input[type=time]{cursor:pointer}
+.dtaddc select:focus,.dtcus input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.dttypes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.4rem}
+.dttypes label{display:block}
+.dttypes span{display:flex;align-items:center;justify-content:center;height:2.75rem;padding:0 .2rem;border-radius:12px;border:1px solid color-mix(in srgb,var(--tc) 30%,var(--line));background:color-mix(in srgb,var(--tc) 6%,var(--surface));color:color-mix(in srgb,var(--tc) 75%,var(--ink));font-size:.88rem;font-weight:700;white-space:nowrap}
+.dttypes label:hover span{border-color:var(--tc)}
+.dttypes input:checked+span{background:var(--tc);border-color:var(--tc);color:#fff;box-shadow:0 10px 18px -12px var(--tc)}
+.dtfa{display:grid;grid-template-columns:1fr auto;gap:.5rem}
+.dtfa .btn{height:2.75rem;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:.35rem}
+.dtfa .btn svg{width:1rem;height:1rem}
+/* courses: dropdown, input and button on one height */
+.dtaddc{display:grid;grid-template-columns:1fr;gap:.5rem}
+.dtcus{display:flex;gap:.5rem}
+.dtcus .btn{height:2.75rem;border-radius:12px;padding:0 1.1rem}
+.dtside .dtterm h2{font-size:1rem}
+@media (min-width:640px) and (max-width:999px){.dtaddc{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.dttypes{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* the reminder when the site opens */
+.dtalert{--uc:var(--ok);position:fixed;z-index:120;bottom:1.2rem;inset-inline-start:1.2rem;width:min(25rem,calc(100vw - 2rem));display:flex;gap:.8rem;align-items:flex-start;padding:1rem 1rem .9rem;border-radius:20px;background:var(--surface);color:var(--ink);border:1px solid color-mix(in srgb,var(--uc) 35%,var(--line));box-shadow:0 24px 60px -24px rgba(20,22,60,.45),0 0 0 4px color-mix(in srgb,var(--uc) 10%,transparent);font-family:var(--font);text-align:start;animation:dtin .4s cubic-bezier(.2,.9,.3,1.1) both}
+.dtalert.soon{--uc:#E8A400}
+.dtalert.now{--uc:#F2667A}
+.dtalert.out{animation:dtout .25s ease both}
+@keyframes dtin{from{opacity:0;transform:translateY(16px) scale(.96)}}
+@keyframes dtout{to{opacity:0;transform:translateY(12px)}}
+.dtai{flex:none;display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:13px;color:#fff;background:var(--uc);box-shadow:0 10px 18px -10px var(--uc)}
+.dtai svg{width:1.3rem;height:1.3rem}
+.dtab{flex:1;min-width:0}
+.dtab>b{display:block;font-size:.98rem;margin-bottom:.45rem}
+.dtab ul{list-style:none;margin:0;padding:0;display:grid;gap:.35rem}
+.dtab li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.1rem .5rem;align-items:center;padding:.45rem .6rem;border-radius:12px;background:color-mix(in srgb,var(--tc) 7%,var(--surface));border:1px solid color-mix(in srgb,var(--tc) 22%,var(--line))}
+.dtat{font-size:.72rem;font-weight:800;color:var(--tc)}
+.dtan{display:flex;flex-direction:column;min-width:0}
+.dtan b{font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dtan small{font-size:.72rem;color:var(--muted)}
+.dtab li em{grid-column:1/-1;font-style:normal;font-size:.76rem;font-weight:700;color:var(--ok)}
+.dtab li.soon em{color:#B57A00}
+.dtab li.now em{color:#D9364F}
+.dtam{display:block;margin-top:.35rem;font-size:.74rem;color:var(--muted)}
+.dtaa{display:flex;gap:.4rem;margin-top:.7rem}
+.dtalert>.dtx{flex:none;width:1.8rem;height:1.8rem}
+.dtsw{display:grid;gap:.5rem}
+.dtsw .dthome{margin:0}
+@media (max-width:520px){.dtalert{inset-inline:.75rem;bottom:.75rem;width:auto}}
+@media (prefers-reduced-motion:reduce){.dtalert,.dtalert.out{animation:none}}
 @media (prefers-reduced-motion:reduce){.dtr.now .dtl{animation:none}}
 
 /* the logo in the top bar (add_logo.py) */
@@ -5144,7 +5228,7 @@ const Dates = (() => {
     clock: IC('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>') };
   const TYPES = () => ({ exam: [T('اختبار', 'Exam'), '#F2667A', I.exam], assign: [T('واجب', 'Assignment'), '#4C9DFF', I.assign], project: [T('مشروع', 'Project'), '#9B7BFF', I.project], quiz: [T('كويز', 'Quiz'), '#F5A524', I.quiz], other: [T('موعد', 'Other'), '#2EC4B6', I.other] });
   let D = { items: [], custom: [], hide: false }, FILTER = 'all', FORM = null, MSG = '';
-  try { const o = JSON.parse(localStorage.getItem(KEY) || 'null'); if (o && Array.isArray(o.items)) D = { items: o.items, custom: Array.isArray(o.custom) ? o.custom : [], hide: !!o.hide }; } catch (e) {}
+  try { const o = JSON.parse(localStorage.getItem(KEY) || 'null'); if (o && Array.isArray(o.items)) D = { items: o.items, custom: Array.isArray(o.custom) ? o.custom : [], hide: !!o.hide, quiet: !!o.quiet }; } catch (e) {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(D)); } catch (e) {} };
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
   const metaOf = id => COURSE_META.find(m => m.id === id && !m.parent);
@@ -5184,7 +5268,8 @@ const Dates = (() => {
     return `<div class="dtr ${cls}${it.done ? ' isdone' : ''}" style="--tc:${tc};--cc:${courseColor(it)}">
       <span class="dti" aria-hidden="true">${ti}</span>
       <span class="dtb"><b>${esc(it.title)}</b><small><span class="dtty">${ty}</span>${cn ? ' · ' + esc(cn) : ''}${big ? ' · ' + esc(dateTxt(it)) : ''}</small>${big && it.note ? `<small class="dtnt">${I.clip}${esc(it.note)}</small>` : ''}</span>
-      ${big || it.done || cls === 'past' ? `<span class="dtl">${lt}</span>` : `<span class="dtl dtcd" data-dtc="${+when(it)}" title="${esc(lt)}">${I.clock}<span>${mini(+when(it))}</span></span>`}
+      ${big ? `<span class="dtrr"><span class="dtl">${lt}</span>${it.done || cls === 'past' ? '' : `<span class="dtcd dtcd2" data-dtc="${+when(it)}">${I.clock}<span>${mini(+when(it))}</span></span>`}</span>`
+        : it.done || cls === 'past' ? `<span class="dtl">${lt}</span>` : `<span class="dtl dtcd" data-dtc="${+when(it)}" title="${esc(lt)}">${I.clock}<span>${mini(+when(it))}</span></span>`}
       ${big ? `<span class="dta"><button type="button" class="text" data-dt="done" data-x="${it.id}">${it.done ? T('رجّعه', 'Undo') : T('خلصته ✓', 'Done ✓')}</button><button type="button" class="text" data-dt="edit" data-x="${it.id}">${T('تعديل', 'Edit')}</button><button type="button" class="text" data-dt="ics" data-x="${it.id}">${T('للتقويم', 'Calendar')}</button><button type="button" class="text bad" data-dt="del" data-x="${it.id}">${T('حذف', 'Delete')}</button></span>` : ''}
     </div>`;
   };
@@ -5208,20 +5293,20 @@ const Dates = (() => {
   }
   /* ---------- the page ---------- */
   function formHTML() {
-    const f = FORM, tc = termCourses(), all = COURSE_META.filter(m => !m.parent).sort((a, b) => T(a.ar, a.en).localeCompare(T(b.ar, b.en), 'ar'));
+    const f = FORM || { type: 'exam' }, tc = termCourses(), all = COURSE_META.filter(m => !m.parent).sort((a, b) => T(a.ar, a.en).localeCompare(T(b.ar, b.en), 'ar'));
     const sel = f.cid ? 'p:' + f.cid : f.cname ? 'c:' + f.cname : '';
     return `<form class="dtform" id="dtform" novalidate>
       <h2>${f.id ? T('تعديل الموعد', 'Edit date') : T('موعد جديد', 'New date')}</h2>
-      <div class="dttypes" role="radiogroup" aria-label="${T('النوع', 'Type')}">${Object.entries(TYPES()).map(([k, [n, c, i]]) => `<label style="--tc:${c}"><input type="radio" name="dtt" value="${k}" ${f.type === k ? 'checked' : ''}><span>${i} ${n}</span></label>`).join('')}</div>
+      <div class="dttypes" role="radiogroup" aria-label="${T('النوع', 'Type')}">${Object.entries(TYPES()).map(([k, [n, c, i]]) => `<label style="--tc:${c}"><input type="radio" name="dtt" value="${k}" ${f.type === k ? 'checked' : ''}><span>${n}</span></label>`).join('')}</div>
       <label class="dtf"><span>${T('المادة', 'Course')}</span><select id="dtc"><option value="">${T('— اختر —', '— choose —')}</option>
         ${tc.length ? `<optgroup label="${T('موادي هالترم', 'My courses this term')}">${tc.map(c => `<option value="${c.cid ? 'p:' + c.cid : 'c:' + esc(c.cname)}" ${sel === (c.cid ? 'p:' + c.cid : 'c:' + c.cname) ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</optgroup>` : ''}
         <optgroup label="${T('كل مواد المنصة', 'All platform courses')}">${all.filter(m => !getMy().includes(m.id)).map(m => `<option value="p:${m.id}" ${sel === 'p:' + m.id ? 'selected' : ''}>${esc(T(m.ar, m.en))}</option>`).join('')}</optgroup></select></label>
       <label class="dtf"><span>${T('العنوان', 'Title')}</span><input id="dtti" maxlength="80" value="${esc(f.title || '')}" placeholder="${T('مثلاً: ميد 1، واجب الفصل 3، تسليم المشروع', 'e.g. Midterm 1, Chapter 3 assignment, project hand-in')}"></label>
-      <div class="dt2"><label class="dtf"><span>${T('التاريخ', 'Date')}</span><input type="date" id="dtd" value="${esc(f.date || '')}"></label>
-        <label class="dtf"><span>${T('الوقت (اختياري)', 'Time (optional)')}</span><input type="time" id="dtm" value="${esc(f.time || '')}"></label></div>
+      <div class="dt2"><label class="dtf"><span>${T('التاريخ', 'Date')}</span><span class="dtin"><input type="date" id="dtd" dir="ltr" required value="${esc(f.date || '')}"><em class="dtph">${T('اختر التاريخ', 'Pick a date')}</em></span></label>
+        <label class="dtf"><span>${T('الوقت (اختياري)', 'Time (optional)')}</span><input type="time" id="dtm" dir="ltr" value="${esc(f.time || '')}"></label></div>
       <label class="dtf"><span>${T('ملاحظة (اختياري)', 'Note (optional)')}</span><input id="dtn" maxlength="140" value="${esc(f.note || '')}" placeholder="${T('القاعة، الفصول المطلوبة، طريقة التسليم…', 'Room, chapters, how to hand in…')}"></label>
       ${MSG ? `<p class="dterr" role="alert">${MSG}</p>` : ''}
-      <div class="dtfa"><button type="submit" class="btn pri">${f.id ? T('احفظ', 'Save') : T('أضف الموعد', 'Add date')}</button><button type="button" class="btn" data-dt="cancel">${T('إلغاء', 'Cancel')}</button></div>
+      <div class="dtfa"><button type="submit" class="btn pri">${I.plus}${f.id ? T('احفظ التعديل', 'Save') : T('أضف الموعد', 'Add date')}</button><button type="button" class="btn" data-dt="cancel">${f.id ? T('إلغاء', 'Cancel') : T('مسح', 'Clear')}</button></div>
     </form>`;
   }
   /* the big counter: hours (or minutes) on the day itself, days otherwise */
@@ -5240,23 +5325,26 @@ const Dates = (() => {
     const tc = termCourses();
     return `${barHTML(`<button class="text" data-act="landing">&larr; ${T('الرئيسية', 'Home')}</button>`)}
     <div class="dtpage" dir="${DIR()}">
-      <section class="dthero">
-        <div><span class="dtpill">${I.cal}${T('مواعيدي', 'My dates')}</span><h1>${next ? esc(next.title) : T('مواعيدك في مكان واحد', 'All your dates in one place')}</h1>
-          <p>${next ? `${esc(courseName(next) || TYPES()[next.type][0])} · ${esc(dateTxt(next))}` : T('اختباراتك وواجباتك ومشاريعك، وكم باقي على كل وحدة.', 'Your exams, assignments and projects, and how long is left for each.')}</p></div>
-        ${next ? segHTML(next) : ''}
-      </section>
-      ${FORM ? formHTML() : `<button type="button" class="btn pri dtadd" data-dt="new">+ ${T('أضف موعد', 'Add a date')}</button>`}
-      <section class="dtterm"><h2>${T('موادي هالترم', 'My courses this term')}</h2>
-        <div class="dtchips">${tc.map(c => `<span class="dtchip" style="--cc:${c.cid ? COURSE_COLORS[c.cid] || 'var(--accent)' : 'var(--muted)'}">${esc(c.name)}<button type="button" data-dt="rmc" data-x="${c.cid ? 'p:' + c.cid : 'c:' + esc(c.cname)}" aria-label="${T('شيلها', 'Remove')}: ${esc(c.name)}">×</button></span>`).join('') || `<small class="dtmuted">${T('ما أضفت مواد. أضف المواد اللي نازلة لك هالترم.', 'No courses yet. Add the ones you take this term.')}</small>`}</div>
-        <div class="dtaddc"><select id="dtpc" aria-label="${T('مادة من المنصة', 'A platform course')}"><option value="">${T('+ مادة من المنصة', '+ Platform course')}</option>${COURSE_META.filter(m => !m.parent && !getMy().includes(m.id)).map(m => `<option value="${m.id}">${esc(T(m.ar, m.en))}</option>`).join('')}</select>
-          <span class="dtcus"><input id="dtcc" maxlength="60" placeholder="${T('أو اكتب اسم مادة ثانية', 'or type another course')}"><button type="button" class="btn sm" data-dt="addc">${T('أضف', 'Add')}</button></span></div>
-      </section>
-      ${D.items.length ? `<nav class="lvnav dttabs" aria-label="${T('النوع', 'Type')}">${tabs}</nav>
-        ${group(T('هالأسبوع', 'This week'), wk)}${group(T('بعدين', 'Later'), later)}
-        ${old.length ? `<details class="dtold"><summary>${T('خلصت أو فاتت', 'Done or past')} (${old.length})</summary>${old.map(it => row(it, true)).join('')}</details>` : ''}
-        ${!wk.length && !later.length ? `<p class="dtmuted dtnone">${T('ما فيه مواعيد جاية هنا.', 'No upcoming dates here.')}</p>` : ''}`
-        : `<div class="dtempty"><span aria-hidden="true">${I.cal}</span><p>${T('ابدأ بأقرب اختبار أو واجب عندك.', 'Start with your nearest exam or assignment.')}</p></div>`}
-      <label class="dthome"><input type="checkbox" data-dth="home" ${D.hide ? '' : 'checked'}><span></span>${T('اعرض مواعيدي في الصفحة الرئيسية', 'Show my dates on the home page')}</label>
+      <div class="dtcols">
+        <section class="dtmain" aria-label="${T('المواعيد الجاية', 'Upcoming dates')}">
+          <div class="dtsh"><h2>${T('المواعيد الجاية', 'Upcoming dates')}${up.length ? ` <small>${up.length}</small>` : ''}</h2><button type="button" class="btn sm dtnew" data-dt="new">${I.plus}${T('أضف موعد', 'Add a date')}</button></div>
+          ${D.items.length ? `<nav class="lvnav dttabs" aria-label="${T('النوع', 'Type')}">${tabs}</nav>
+          ${group(T('هالأسبوع', 'This week'), wk)}${group(T('بعدين', 'Later'), later)}
+          ${!wk.length && !later.length ? `<p class="dtmuted dtnone">${T('ما فيه مواعيد جاية هنا.', 'No upcoming dates here.')}</p>` : ''}
+          ${old.length ? `<details class="dtold"><summary>${T('خلصت أو فاتت', 'Done or past')} (${old.length})</summary>${old.map(it => row(it, true)).join('')}</details>` : ''}`
+          : `<div class="dtempty"><span aria-hidden="true">${I.cal}</span><p>${T('ابدأ بأقرب اختبار أو واجب عندك من النموذج.', 'Start with your nearest exam or assignment using the form.')}</p></div>`}
+        </section>
+        <aside class="dtside">
+          ${formHTML()}
+          <section class="dtterm"><h2>${T('موادي هالترم', 'My courses this term')}</h2>
+            <div class="dtchips">${tc.map(c => `<span class="dtchip" style="--cc:${c.cid ? COURSE_COLORS[c.cid] || 'var(--accent)' : 'var(--muted)'}">${esc(c.name)}<button type="button" data-dt="rmc" data-x="${c.cid ? 'p:' + c.cid : 'c:' + esc(c.cname)}" aria-label="${T('شيلها', 'Remove')}: ${esc(c.name)}">×</button></span>`).join('') || `<small class="dtmuted">${T('ما أضفت مواد. أضف المواد اللي نازلة لك هالترم، وتطلع لك في خانة المادة فوق.', 'No courses yet. Add the ones you take this term; they show in the course list above.')}</small>`}</div>
+            <div class="dtaddc"><select id="dtpc" aria-label="${T('مادة من المنصة', 'A platform course')}"><option value="">${T('+ مادة من المنصة', '+ Platform course')}</option>${COURSE_META.filter(m => !m.parent && !getMy().includes(m.id)).map(m => `<option value="${m.id}">${esc(T(m.ar, m.en))}</option>`).join('')}</select>
+              <span class="dtcus"><input id="dtcc" maxlength="60" placeholder="${T('أو اكتب اسم مادة ثانية', 'or type another course')}"><button type="button" class="btn" data-dt="addc">${T('أضف', 'Add')}</button></span></div>
+          </section>
+          <div class="dtsw"><label class="dthome"><input type="checkbox" data-dth="home" ${D.hide ? '' : 'checked'}><span></span>${T('اعرض مواعيدي في الصفحة الرئيسية', 'Show my dates on the home page')}</label>
+          <label class="dthome"><input type="checkbox" data-dth="alert" ${D.quiet ? '' : 'checked'}><span></span>${T('نبّهني بمواعيد هالأسبوع كل ما أفتح الموقع', 'Remind me of this week\'s dates whenever I open the site')}</label></div>
+        </aside>
+      </div>
       <p class="dtnote">${T('مواعيدك محفوظة في متصفحك على هذا الجهاز.', 'Your dates are kept in this browser on this device.')}</p>
     </div>`;
   }
@@ -5275,6 +5363,8 @@ const Dates = (() => {
     const t = document.querySelector('[name="dtt"]:checked'), c = v('dtc');
     return { ...FORM, type: t ? t.value : 'exam', cid: c.startsWith('p:') ? c.slice(2) : '', cname: c.startsWith('c:') ? c.slice(2) : '', title: v('dtti').trim().slice(0, 80), date: v('dtd'), time: v('dtm'), note: v('dtn').trim().slice(0, 140) };
   }
+  /* the form keeps what was typed when the page is drawn again (e.g. after adding a course) */
+  function keepForm() { if (document.getElementById('dtform')) FORM = readForm(); else if (!FORM) FORM = { type: 'exam' }; }
   function submit() {
     const f = readForm(); FORM = f;
     if (!f.title) { MSG = T('اكتب عنوان الموعد.', 'Write a title.'); return render(true); }
@@ -5297,26 +5387,52 @@ const Dates = (() => {
     document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   }
   document.addEventListener('submit', e => { if (e.target.id === 'dtform') { e.preventDefault(); submit(); } });
+  document.addEventListener('click', e => { const i = e.target.closest && e.target.closest('#dtd,#dtm'); if (i && i.showPicker) { try { i.showPicker(); } catch (err) {} } });
   document.addEventListener('click', e => {
     const b = e.target.closest('[data-dt]'); if (!b) return;
     const k = b.dataset.dt, x = b.dataset.x, it = x && D.items.find(i => i.id === x);
     switch (k) {
       case 'hide': { D.hide = true; save(); const c = b.closest('.dtcard,.dtcta'); if (c) c.outerHTML = `<div class="dthidden" dir="${DIR()}">${I.cal}<span>${T('أخفينا مواعيدي من الرئيسية. ترجعها من صفحة مواعيدي.', 'My dates is hidden from home. Bring it back from the dates page.')}</span><button type="button" class="text" data-dt="unhide">${T('تراجع', 'Undo')}</button></div>`; return; }
       case 'unhide': { D.hide = false; save(); const c = b.closest('.dthidden'); if (c) c.outerHTML = cardHTML(); return; }
+      case 'alertx': return closeAlert();
+      case 'alertgo': closeAlert(); return go(false);
       case 'go': return go(false);
-      case 'new': if (S.screen !== 'dates') return go(true); FORM = { type: 'exam' }; MSG = ''; render(true); return setTimeout(() => { const i = document.getElementById('dtti'); if (i) i.focus(); }, 60);
+      case 'new': if (S.screen !== 'dates') return go(true); if (FORM && FORM.id) FORM = { type: 'exam' }; MSG = ''; render(true); return setTimeout(() => { const i = document.getElementById('dtti'); if (i) { i.scrollIntoView({ block: 'center', behavior: 'smooth' }); i.focus({ preventScroll: true }); } }, 60);
       case 'cancel': FORM = null; MSG = ''; return render(true);
       case 'f': FILTER = x; return render(true);
       case 'done': if (it) { it.done = !it.done; save(); } return render(true);
-      case 'edit': if (it) { FORM = { ...it }; MSG = ''; render(true); scrollTo({ top: 0, behavior: 'smooth' }); } return;
+      case 'edit': if (it) { FORM = { ...it }; MSG = ''; render(true); const fm = document.getElementById('dtform'); if (fm) fm.scrollIntoView({ block: 'start', behavior: 'smooth' }); } return;
       case 'del': if (it && confirm(T(`تحذف «${it.title}»؟`, `Delete "${it.title}"?`))) { D.items = D.items.filter(i => i !== it); save(); render(true); } return;
       case 'ics': if (it) ics(it); return;
-      case 'addc': { const i = document.getElementById('dtcc'), n = (i && i.value || '').trim().slice(0, 60); if (n && !D.custom.includes(n)) { D.custom.push(n); save(); } return render(true); }
-      case 'rmc': if (x.startsWith('p:')) setMy(getMy().filter(id => id !== x.slice(2))); else { D.custom = D.custom.filter(n => n !== x.slice(2)); save(); } return render(true);
+      case 'addc': { keepForm(); const i = document.getElementById('dtcc'), n = (i && i.value || '').trim().slice(0, 60); if (n && !D.custom.includes(n)) { D.custom.push(n); save(); } if (n && !FORM.cid && !FORM.cname) FORM.cname = n; return render(true); }
+      case 'rmc': keepForm(); if (x.startsWith('p:')) setMy(getMy().filter(id => id !== x.slice(2))); else { D.custom = D.custom.filter(n => n !== x.slice(2)); save(); } return render(true);
     }
   });
-  document.addEventListener('change', e => { if (e.target.id === 'dtpc' && e.target.value) { setMy([...new Set([...getMy(), e.target.value])]); render(true); }
-    if (e.target.dataset && e.target.dataset.dth === 'home') { D.hide = !e.target.checked; save(); } });
+  document.addEventListener('change', e => { if (e.target.id === 'dtpc' && e.target.value) { keepForm(); setMy([...new Set([...getMy(), e.target.value])]); if (!FORM.cid && !FORM.cname) FORM.cid = e.target.value; render(true); }
+    if (e.target.dataset && e.target.dataset.dth === 'home') { D.hide = !e.target.checked; save(); }
+    if (e.target.dataset && e.target.dataset.dth === 'alert') { D.quiet = !e.target.checked; save(); } });
+  /* ---------- the reminder when the site opens: this week's dates, nearest first ---------- */
+  function alertHTML(list) {
+    const u = left(list[0])[1];
+    return `<div class="dtalert ${u}" id="dtalert" role="status" aria-live="polite" dir="${DIR()}">
+      <span class="dtai">${I.clock}</span>
+      <div class="dtab"><b>${T('تنبيه: عندك مواعيد قريبة', 'Heads-up: dates coming up')}</b>
+        <ul>${list.slice(0, 3).map(it => { const [ty, tc] = TYPES()[it.type] || TYPES().other, [lt, cls] = left(it), cn = courseName(it);
+          return `<li class="${cls}" style="--tc:${tc}"><span class="dtat">${ty}</span><span class="dtan"><b>${esc(it.title)}</b>${cn ? `<small>${esc(cn)}</small>` : ''}</span><em>${lt}${it.time ? ' · ' + timeTxt(it.time) : ''}</em></li>`; }).join('')}</ul>
+        ${list.length > 3 ? `<small class="dtam">${T(`و${list.length - 3} مواعيد ثانية هالأسبوع`, `and ${list.length - 3} more this week`)}</small>` : ''}
+        <div class="dtaa"><button type="button" class="btn sm pri" data-dt="alertgo">${T('شوف مواعيدي', 'See my dates')}</button><button type="button" class="btn sm" data-dt="alertx">${T('تمام', 'OK')}</button></div></div>
+      <button type="button" class="dtx" data-dt="alertx" aria-label="${T('إغلاق التنبيه', 'Close the reminder')}">${I.x}</button></div>`;
+  }
+  function showAlert() {
+    if (D.quiet || document.getElementById('dtalert')) return;
+    try { if (sessionStorage.getItem('dt-alerted')) return; } catch (e) {}
+    if (!Stats.name || !Stats.name()) return;
+    const list = upcoming().filter(it => dayDiff(it) <= 7); if (!list.length) return;
+    try { sessionStorage.setItem('dt-alerted', '1'); } catch (e) {}
+    document.body.insertAdjacentHTML('beforeend', alertHTML(list));
+  }
+  const closeAlert = () => { const a = document.getElementById('dtalert'); if (a) { a.classList.add('out'); setTimeout(() => a.remove(), 250); } };
+  setTimeout(showAlert, 1200);
   document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('dtcta')) { e.preventDefault(); go(false); } });
   /* every second: the countdowns tick; when one reaches zero the card (or the page) is drawn again */
   setInterval(() => {
@@ -5330,7 +5446,7 @@ const Dates = (() => {
     if (S.screen === 'dates') render(true);
   }, 1000);
   setInterval(() => { if (S.screen === 'landing' && D.items.length && !document.querySelector('input:focus,select:focus')) { const c = document.querySelector('.dtcard'); if (c) c.outerHTML = cardHTML(); } }, 60000);   // keep «باقي …» fresh
-  return { cardHTML, pageHTML, go, _D: () => D };
+  return { cardHTML, pageHTML, go, showAlert, _D: () => D };
 })();
 function datesBtn() {
   return `<button type="button" class="gear plbtn dtbtn" onclick="Dates.go()" aria-label="${T('مواعيدي', 'My dates')}" title="${T('مواعيدي', 'My dates')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="15.5" cy="15.5" r="2.6"/><path d="M15.5 14.4v1.2l.8.6"/></svg><span>${T('مواعيدي', 'My dates')}</span></button>`;
