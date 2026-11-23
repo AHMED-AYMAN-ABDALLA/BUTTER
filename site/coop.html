@@ -661,18 +661,16 @@ const TOP = SECTORS.filter(s => s[1] >= 6).map(s => s[0]);
 let tab = 'all', filt = '', shown = 24;
 const norm = s => String(s).toLowerCase().replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/[ًٌٍَُِّْـ]/g, '');
 const loveLabel = o => `تقييم الطلاب (${o.xp.pos.length})`;
-/* the buttons: prepare the e-mail, the e-mail (or the training letter), and the application page, or the organisation's
-   own site; when neither is known that place stays empty */
+/* the same three buttons on every card: prepare the e-mail (it shows the address with a copy button), the training letter,
+   and the organisation's site (its application page when known); when no site is known that place stays empty */
 const LETTER = `<a class="btn sm" href="https://fieldtraining.imamu.edu.sa/" target="_blank" rel="noopener" title="اطلع خطاب التدريب للجهة">طلّع الخطاب ↗</a>`;
 const site = o => /^[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}$/i.test(o.dom || '') ? 'https://' + o.dom.toLowerCase() + '/' : '';
 function actions(o, big) {
   const saved = !!ST.saved[o.id], st = ST.status[o.id] || '', m = o.apply.find(a => a.t === 'mail'), w = o.apply.find(a => a.t === 'web');
   return `<div class="acts">
       <button type="button" class="btn sm pri" data-target="${o.id}">جهّز الإيميل</button>
-      ${m ? `<button type="button" class="btn sm" data-copy="${esc(m.v)}" title="${esc(m.v)}">نسخ الإيميل</button>` : LETTER}
-      ${w ? `<a class="btn sm" href="${esc(w.v)}" target="_blank" rel="noopener">صفحة التقديم ↗</a>`
-        : site(o) ? `<a class="btn sm" href="${esc(site(o))}" target="_blank" rel="noopener" title="${esc(o.dom)}">موقع الجهة ↗</a>`
-        : m ? LETTER : ''}
+      ${LETTER}
+      ${w || site(o) ? `<a class="btn sm" href="${esc(w ? w.v : site(o))}" target="_blank" rel="noopener" title="${w ? 'صفحة التقديم' : esc(o.dom)}">موقع الجهة ↗</a>` : ''}
       ${big ? `<button type="button" class="btn sm" data-star="${o.id}">${saved ? '★ في قائمتي' : '☆ احفظها في قائمتي'}</button>` : ''}
       ${saved ? `<select class="status st${st}" data-status="${o.id}" aria-label="حالة الطلب">${STATUS.map(([k, t]) => `<option value="${k}" ${k === st ? 'selected' : ''}>${t}</option>`).join('')}</select>` : ''}
     </div>`;
