@@ -1970,6 +1970,17 @@ html[data-ui="en"] .morewrap .menu.more{left:auto;right:0;transform-origin:top r
 .menu.more .mrow{padding:.3rem .3rem}
 .menu.more .mnote{margin:.5rem .3rem .2rem;font-size:.72rem;line-height:1.6;color:var(--muted)}
 </style>
+<style>
+.rpcard{margin:1rem 0;padding:1rem 1.1rem;border-radius:22px;border:1px solid color-mix(in srgb,var(--ok) 35%,var(--line));background:radial-gradient(120% 120% at 100% 0%,color-mix(in srgb,var(--ok) 12%,transparent),transparent 60%),var(--surface);box-shadow:0 1px 2px rgba(20,22,60,.04),0 14px 30px -18px color-mix(in srgb,var(--ok) 45%,transparent)}
+.rpt{display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem}.rpt h2{font-size:1.05rem;margin:0}
+.rpic{display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:12px;background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}.rpic svg{width:1.25rem;height:1.25rem}
+.rpcard ul,.rplist{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.rpi{position:relative;padding:.7rem .8rem;border-radius:14px;background:color-mix(in srgb,var(--ink) 3%,transparent);border:1px solid var(--line)}
+.rph{display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;font-size:.82rem}.rph small{color:var(--muted)}
+.rpm{margin:.35rem 0 0;white-space:pre-line;line-height:1.7;overflow-wrap:anywhere}
+.rpok{margin-top:.5rem;font:inherit;font-size:.82rem;font-weight:700;padding:.3rem .8rem;border-radius:999px;border:1px solid color-mix(in srgb,var(--ok) 45%,var(--line));background:transparent;color:var(--ok);cursor:pointer}
+.rpok:hover{background:color-mix(in srgb,var(--ok) 12%,transparent)}
+</style>
 </head>
 
 <body><noscript><div dir="rtl" lang="ar" style="max-width:720px;margin:2rem auto;padding:0 16px;font-family:system-ui"><h1>زبدة · منصة زبدة للمذاكرة</h1><p>زبدة (زبده) منصة مذاكرة مجانية لطلاب جامعة الإمام محمد بن سعود الإسلامية: شرح المواد بالعربي مع المصطلحات بالإنجليزي، اختبار بعد كل درس، نماذج ميد وفاينل سابقة، خطتي للمذاكرة، المسار المهني والتدريب التعاوني.</p><ul><li><a href="coop.html">التدريب التعاوني</a></li><li><a href="career.html">مساري المهني</a></li><li><a href="general.html">المواد العامة</a></li><li><a href="iot.html">إنترنت الأشياء</a></li><li><a href="security.html">أمن الشبكات</a></li></ul><p>المنصة تحتاج تفعيل JavaScript في المتصفح.</p></div></noscript>
@@ -2326,7 +2337,7 @@ function landingHTML() {
     
     <h1 dir="${DIR()}">${T('أهلًا', 'Hi,')} ${esc(Stats.name())}</h1>${starsHTML()}
     <p class="lead" dir="${DIR()}">${T('وش تبي تذاكر اليوم؟', 'What would you like to study today?')}</p>
-    ${badgesHTML()}
+    ${Replies.cardHTML()}${badgesHTML()}
     ${Dates.toggleHTML()}${Dates.cardHTML()}
     ${planCardHTML()}${Majors.cardHTML()}${CSearch.html()}
     <div class="levels" dir="${DIR()}" lang="${UI_EN() ? 'en' : 'ar'}">${chips}${body}</div>`;
@@ -5157,6 +5168,57 @@ const Plan = (() => {
 /* frame pages report quiz results to the plan too */
 { const h0 = window.__extHook; window.__extHook = (t, d) => { h0(t, d); try { Plan.onExt(t, d); } catch (e) {} }; }
 /* ===================== «ملفي» (the student's own page) ===================== */
+
+/* ===================== replies from the admin (study/replies/<own id>) ===================== */
+const Replies = (() => {
+  const SEEN = 'study-replies-seen-v1', KEEP = 'study-replies-v1';
+  let list = [], last = 0;
+  const read = k => { try { const v = JSON.parse(localStorage.getItem(k) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } };
+  const seen = () => new Set(read(SEEN).filter(x => typeof x === 'string'));
+  const clean = o => {
+    const L = [];
+    if (!o || typeof o !== 'object') return L;
+    Object.entries(o).slice(0, 100).forEach(([k, v]) => {
+      if (!/^[a-z0-9]{6,30}$/.test(k) || !v || typeof v !== 'object' || typeof v.m !== 'string' || !v.m.trim()) return;
+      L.push({ k, m: v.m.slice(0, 600), re: typeof v.re === 'string' ? v.re.slice(0, 100) : '', t: typeof v.t === 'number' && isFinite(v.t) ? v.t : 0 });
+    });
+    return L.sort((a, b) => b.t - a.t);
+  };
+  list = clean(Object.fromEntries(read(KEEP).filter(x => x && x.k).map(x => [x.k, x])));
+  function load() {
+    const id = Stats.uid();
+    if (!/^[A-Za-z0-9_-]{22}$/.test(id || '') || Stats.banned() || Date.now() - last < 60000) return;
+    last = Date.now();
+    fetch(`${STATS_DB}/replies/${id}.json`, { cache: 'no-store' }).then(r => (r.ok ? r.json() : undefined)).then(o => {
+      if (o === undefined) return;
+      const L = clean(o), changed = JSON.stringify(L) !== JSON.stringify(list);
+      list = L; try { localStorage.setItem(KEEP, JSON.stringify(L)); } catch (e) {}
+      if (changed && ['landing', 'home', 'profile'].includes(S.screen)) render(true);
+    }).catch(() => {});
+  }
+  const fresh = () => { const s0 = seen(); return list.filter(r => !s0.has(r.k)); };
+  const day = t => t ? new Date(t).toLocaleDateString(UI_EN() ? 'en-GB' : 'ar-SA-u-ca-gregory-nu-latn', { day: 'numeric', month: 'long' }) : '';
+  const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12.5a7.5 7.5 0 0 1-11 6.6L4 20l1-4.3A7.5 7.5 0 1 1 20 12.5z"/><path d="m8.8 12.2 2.2 2.2 4.3-4.4"/></svg>';
+  const item = (r, btn) => `<li class="rpi"><div class="rph">${r.re ? `<b>${esc(r.re)}</b>` : ''}<small>${esc(day(r.t))}</small></div><p class="rpm">${esc(r.m)}</p>${btn ? `<button type="button" class="rpok" data-rp="${esc(r.k)}">${T('تم ✓', 'Got it ✓')}</button>` : ''}</li>`;
+  function cardHTML() {
+    const F = fresh();
+    if (!F.length) return '';
+    return `<section class="rpcard" dir="${DIR()}" aria-label="${T('رد من زبدة', 'A reply from Zubdah')}"><div class="rpt"><span class="rpic">${ICON}</span><h2>${F.length === 1 ? T('وصلك رد على طلبك', 'You got a reply') : F.length === 2 ? T('وصلك ردّين', 'You got 2 replies') : T(`وصلك ${F.length} ردود`, `You got ${F.length} replies`)}</h2></div><ul>${F.slice(0, 5).map(r => item(r, true)).join('')}</ul></section>`;
+  }
+  function profileHTML() {
+    if (!list.length) return '';
+    return `<section class="pfsec"><div class="pfsh"><h2>${T('ردود زبدة على طلباتك', 'Replies to your requests')}</h2></div><ul class="rplist">${list.slice(0, 30).map(r => item(r, false)).join('')}</ul></section>`;
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('[data-rp]'); if (!b) return;
+    const s0 = seen(); s0.add(b.dataset.rp);
+    try { localStorage.setItem(SEEN, JSON.stringify([...s0].slice(-200))); } catch (er) {}
+    const li = b.closest('.rpi'), card = b.closest('.rpcard');
+    if (li) li.remove(); if (card && !card.querySelector('.rpi')) card.remove();
+  });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') load(); });
+  return { load, cardHTML, profileHTML };
+})();
 const Profile = (() => {
   let FILTER = 'all';
   const ring = (v, size, label) => `<span class="pfring" style="--v:${Math.max(0, Math.min(100, v))};--s:${size}px"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15.9" class="bg"/><circle cx="18" cy="18" r="15.9" class="fg" pathLength="100" stroke-dasharray="${Math.max(0, Math.min(100, v))} 100"/></svg><b>${label}</b></span>`;
@@ -5219,7 +5281,7 @@ const Profile = (() => {
         ${shown.length ? `<div class="pfgrid">${shown.map(card).join('')}</div>`
           : `<div class="pfempty"><span aria-hidden="true">🌱</span><p>${list.length ? T('ما فيه مواد هنا.', 'Nothing here.') : T('ما بدأت أي مادة للحين. اختر مادة وابدأ، أو علّمها بـ ★ عشان تطلع هنا.', 'No courses yet. Pick one and start, or mark it with ★ to see it here.')}</p><button type="button" class="btn pri" data-act="landing">${T('تصفح المواد', 'Browse courses')}</button></div>`}
       </section>
-      ${bd.length ? `<section class="pfsec"><div class="pfsh"><h2>${T('شاراتي', 'My badges')}</h2></div><div class="pfbadges">${bd.map(b => `<div class="pfb" style="--bc:${badgeDef(b.t).color}"><span class="pfbi">${badgeIcon(b, 26)}</span><b>${esc(badgeName(b))}</b>${b.c ? `<small>${esc(courseAr(b.c))}</small>` : ''}</div>`).join('')}</div></section>` : ''}
+      ${Replies.profileHTML()}${bd.length ? `<section class="pfsec"><div class="pfsh"><h2>${T('شاراتي', 'My badges')}</h2></div><div class="pfbadges">${bd.map(b => `<div class="pfb" style="--bc:${badgeDef(b.t).color}"><span class="pfbi">${badgeIcon(b, 26)}</span><b>${esc(badgeName(b))}</b>${b.c ? `<small>${esc(courseAr(b.c))}</small>` : ''}</div>`).join('')}</div></section>` : ''}
       <p class="pfnote">${T('ملفك محفوظ في متصفحك على هذا الجهاز.', 'Your profile is kept in this browser on this device.')}</p>
     </div>`;
   }
@@ -5902,6 +5964,7 @@ function moreHTML() {
 /* ---------- 3.11 Init ---------- */
 applyPrefs();
 Stats.onChange(() => render());
+setTimeout(() => Replies.load(), 400);
 Stats.visit();
 render();
 fromHash();
