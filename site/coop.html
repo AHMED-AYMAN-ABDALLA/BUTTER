@@ -408,7 +408,8 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
         <div class="row" style="justify-content:space-between"><h3>إيميل التقديم</h3><div class="seg" role="group" aria-label="لغة الإيميل"><button type="button" data-lang="ar" class="on">عربي</button><button type="button" data-lang="en">English</button></div></div>
         <div class="fgrid">
           <label class="fld">الاسم الكامل<input id="f-name" autocomplete="name" maxlength="60" placeholder="مثال: أحمد محمد القحطاني"></label>
-          <label class="fld">التخصص<input id="f-major" maxlength="60" value="تقنية المعلومات"></label>
+          <label class="fld">الكلية<select id="f-col"></select></label>
+          <label class="fld">التخصص<select id="f-major"></select></label>
           <label class="fld">الصيغة<select id="f-g"><option value="m">طالب</option><option value="f">طالبة</option></select></label>
           <label class="fld">فترة التدريب<select id="f-term"><option value="sum">الفصل الصيفي</option><option value="t1">الفصل الدراسي الأول</option><option value="t2">الفصل الدراسي الثاني</option></select></label>
           <label class="fld">رقم التواصل (اختياري)<input id="f-phone" inputmode="tel" maxlength="20" placeholder="05xxxxxxxx" dir="ltr"></label>
@@ -535,22 +536,34 @@ $('#stepper').addEventListener('click', e => { const b = e.target.closest('[data
 /* 3. the application email */
 const TERM = { sum: ['الفصل الصيفي', 'the summer term'], t1: ['الفصل الدراسي الأول', 'the first semester'], t2: ['الفصل الدراسي الثاني', 'the second semester'] };
 let target = null;
-const F = ['name', 'major', 'g', 'term', 'phone', 'skills'];
-F.forEach(k => { const el = $('#f-' + k); if (ST.form[k] != null && ST.form[k] !== '') el.value = ST.form[k]; el.addEventListener('input', () => { ST.form[k] = el.value.slice(0, 160); save(); mail(); }); });
+/* every college and major of the university, as listed in «طلب تخصص جديد» on the platform (filled in at build time) */
+const MJ = [["كلية علوم الحاسب والمعلومات", "College of Computer and Information Sciences", [["علوم الحاسب", "Computer Science"], ["نظم المعلومات", "Information Systems"], ["تقنية المعلومات", "Information Technology"]]], ["كلية الهندسة", "College of Engineering", [["الهندسة الكهربائية", "Electrical Engineering"], ["الهندسة المدنية", "Civil Engineering"], ["الهندسة الميكانيكية", "Mechanical Engineering"], ["الهندسة الصناعية", "Industrial Engineering"], ["الهندسة المعمارية", "Architectural Engineering"], ["الهندسة الكيميائية", "Chemical Engineering"]]], ["كلية العلوم", "College of Science", [["الأحياء", "Biology"], ["الفيزياء", "Physics"], ["الكيمياء", "Chemistry"], ["الرياضيات التطبيقية", "Applied Mathematics"], ["الإحصاء التطبيقي", "Applied Statistics"], ["الإكتوارية والرياضيات المالية", "Actuarial and Financial Mathematics"], ["العلوم البيئية", "Environmental Sciences"], ["المختبرات الكيميائية", "Chemical Laboratories"]]], ["كلية الأعمال", "College of Business", [["الاقتصاد", "Economics"], ["المحاسبة", "Accounting"], ["المالية (التمويل والاستثمار)", "Finance (Finance and Investment)"], ["المالية (الأعمال المصرفية)", "Finance (Banking)"], ["التأمين وإدارة المخاطر", "Insurance and Risk Management"], ["إدارة الأعمال", "Business Administration"], ["التسويق", "Marketing"]]], ["كلية الطب", "College of Medicine", [["الطب والجراحة", "Medicine and Surgery"]]], ["كلية التمريض", "College of Nursing", [["التمريض", "Nursing"]]], ["كلية الإعلام والاتصال", "College of Media and Communication", [["العلاقات العامة", "Public Relations"], ["الإعلان والاتصال التسويقي", "Advertising and Marketing Communication"], ["الصحافة والإعلام الجديد", "Journalism and New Media"], ["الإذاعة والتلفزيون", "Radio and Television"], ["السينما والمسرح", "Cinema and Theatre"], ["الجرافيكس والوسائط المتعددة", "Graphics and Multimedia"]]], ["كلية اللغات والترجمة", "College of Languages and Translation", [["اللغة الإنجليزية وآدابها", "English Language and Literature"]]], ["كلية العلوم الاجتماعية", "College of Social Sciences", [["التاريخ والحضارة", "History and Civilization"], ["الجغرافيا", "Geography"], ["علم النفس", "Psychology"], ["الاجتماع والخدمة الاجتماعية", "Sociology and Social Work"]]], ["كلية اللغة العربية", "College of Arabic Language", [["اللغة العربية", "Arabic Language"], ["تطبيقات اللغة العربية وحوسبتها", "Arabic Language Applications and Computing"], ["لغة القانون والأنظمة", "Language of Law and Regulations"], ["اللغة الإعلامية", "Media Language"]]], ["كلية الشريعة", "College of Sharia", [["الشريعة", "Sharia"]]], ["كلية أصول الدين والدعوة", "College of Usul al-Din and Dawah", [["القرآن وعلومه", "The Quran and Its Sciences"], ["السنة وعلومها", "The Sunnah and Its Sciences"], ["العقيدة والمذاهب المعاصرة", "Creed and Contemporary Doctrines"]]], ["الكلية التطبيقية", "Applied College", [["السياحة والسفر", "Tourism and Travel"], ["إدارة الفعاليات", "Event Management"], ["الأمن السيبراني", "Cybersecurity"], ["إدارة الموارد البشرية", "Human Resources Management"], ["الحوسبة السحابية", "Cloud Computing"], ["المحاسبة", "Accounting"], ["تصميم وبرمجة الألعاب الإلكترونية", "Video Game Design and Programming"], ["تقنية الشبكات", "Network Technology"], ["إدارة الأعمال", "Business Administration"], ["الكيمياء الصناعية", "Industrial Chemistry"]]]];
+const colOf = m => Math.max(0, MJ.findIndex(c => c[2].some(x => x[0] === m)));
+function fillMajors(ci, keep) {
+  const sel = $('#f-major'), list = MJ[ci][2];
+  sel.innerHTML = list.map(([a]) => `<option value="${esc(a)}">${esc(a)}</option>`).join('');
+  sel.value = list.some(x => x[0] === keep) ? keep : list[0][0];
+}
+$('#f-col').innerHTML = MJ.map((c, i) => `<option value="${i}">${esc(c[0])}</option>`).join('');
+{ const m = ST.form.major || 'تقنية المعلومات', ci = ST.form.col != null && MJ[+ST.form.col] && MJ[+ST.form.col][2].some(x => x[0] === m) ? +ST.form.col : colOf(m);
+  $('#f-col').value = String(ci); fillMajors(ci, m); ST.form.col = String(ci); ST.form.major = $('#f-major').value; }
+$('#f-col').addEventListener('change', () => { fillMajors(+$('#f-col').value); ST.form.major = $('#f-major').value; save(); mail(); });
+const F = ['name', 'col', 'major', 'g', 'term', 'phone', 'skills'];
+F.forEach(k => { const el = $('#f-' + k); if (k !== 'col' && k !== 'major' && ST.form[k] != null && ST.form[k] !== '') el.value = ST.form[k]; el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => { ST.form[k] = el.value.slice(0, 160); save(); mail(); }); });
 const v = k => ($('#f-' + k).value || '').trim();
 function mailText() {
   const ar = ST.lang !== 'en', name = v('name') || (ar ? '[اسمك]' : '[Your name]');
-  const major = v('major') || (ar ? 'تقنية المعلومات' : 'Information Technology'), term = TERM[v('term')] || TERM.sum, skills = v('skills'), phone = v('phone'), f = v('g') === 'f';
+  const col = MJ[+v('col')] || MJ[0], mj = col[2].find(x => x[0] === v('major')) || col[2][0], major = mj[0], term = TERM[v('term')] || TERM.sum, skills = v('skills'), phone = v('phone'), f = v('g') === 'f';
   if (ar) return {
     subject: `طلب تدريب تعاوني · ${major} · ${name}`,
-    body: `السلام عليكم ورحمة الله وبركاته،\n\nأنا ${name}، ${f ? 'طالبة' : 'طالب'} في تخصص ${major} بكلية علوم الحاسب والمعلومات في جامعة الإمام محمد بن سعود الإسلامية، ويسعدني أن أتقدم بطلب التدريب التعاوني لدى ${target ? target.name : 'جهتكم الموقرة'} خلال ${term[0]}، لمدة 280 ساعة (قرابة ثمانية أسابيع).\n\n${skills ? `أتطلع إلى التدريب في مجالات ${skills}، والمساهمة في أعمال الفريق واكتساب خبرة عملية تضيف لي ولكم.\n\n` : ''}أرفقت لكم سيرتي الذاتية وخطاب التدريب من الجامعة، ويسعدني تزويدكم بأي معلومات إضافية.\n\n${f ? 'شاكرة' : 'شاكر'} لكم وقتكم واهتمامكم،\n${name}${phone ? `\nجوال: ${phone}` : ''}`
+    body: `السلام عليكم ورحمة الله وبركاته،\n\nأنا ${name}، ${f ? 'طالبة' : 'طالب'} في تخصص ${major} ب${col[0]} في جامعة الإمام محمد بن سعود الإسلامية، ويسعدني أن أتقدم بطلب التدريب التعاوني لدى ${target ? target.name : 'جهتكم الموقرة'} خلال ${term[0]}، لمدة 280 ساعة (قرابة ثمانية أسابيع).\n\n${skills ? `أتطلع إلى التدريب في مجالات ${skills}، والمساهمة في أعمال الفريق واكتساب خبرة عملية تضيف لي ولكم.\n\n` : ''}أرفقت لكم سيرتي الذاتية وخطاب التدريب من الجامعة، ويسعدني تزويدكم بأي معلومات إضافية.\n\n${f ? 'شاكرة' : 'شاكر'} لكم وقتكم واهتمامكم،\n${name}${phone ? `\nجوال: ${phone}` : ''}`
   };
   const SK_AR = 'الشبكات، تطوير الويب، قواعد البيانات، الأمن السيبراني';
   const skEn = !skills ? '' : skills === SK_AR ? 'networking, web development, databases and cybersecurity' : skills;
-  const majorEn = /تقنية المعلومات/.test(major) ? 'Information Technology' : /علوم الحاسب|علوم حاسب/.test(major) ? 'Computer Science' : /نظم/.test(major) ? 'Information Systems' : major;
+  const majorEn = mj[1];
   return {
     subject: `Cooperative Training Request · ${majorEn} · ${name}`,
-    body: `Dear Hiring Team,\n\nMy name is ${name}, ${/^[AEIOU]/i.test(majorEn) ? 'an' : 'a'} ${majorEn} student at the College of Computer and Information Sciences, Imam Mohammad Ibn Saud Islamic University. I would like to apply for a cooperative training position at ${target ? target.name : 'your organization'} during ${term[1]}, for 280 hours (about eight weeks).\n\n${skEn ? `I am keen to contribute in areas such as ${skEn}, and to gain hands-on experience with your team.\n\n` : ''}Please find attached my CV and the university training letter. I would be glad to provide any further information.\n\nThank you for your time and consideration.\n\nBest regards,\n${name}${phone ? `\nMobile: ${phone}` : ''}`
+    body: `Dear Hiring Team,\n\nMy name is ${name}, ${/^[AEIOU]/i.test(majorEn) ? 'an' : 'a'} ${majorEn} student at the ${col[1]}, Imam Mohammad Ibn Saud Islamic University. I would like to apply for a cooperative training position at ${target ? target.name : 'your organization'} during ${term[1]}, for 280 hours (about eight weeks).\n\n${skEn ? `I am keen to contribute in areas such as ${skEn}, and to gain hands-on experience with your team.\n\n` : ''}Please find attached my CV and the university training letter. I would be glad to provide any further information.\n\nThank you for your time and consideration.\n\nBest regards,\n${name}${phone ? `\nMobile: ${phone}` : ''}`
   };
 }
 function mail() {
@@ -783,7 +796,7 @@ const FAQ = [
   ['من وين أطلّع خطاب التدريب؟', 'من موقع التدريب. إذا الجهة موجودة فيه تطلّع خطابها مباشرة، وإذا مو موجودة ترسل لها نموذج خطة التدريب تعبّيه وتختمه، ثم ترسله لإيميل وحدة التدريب، وبعدها تنضاف الجهة وتطلّع خطابها.'],
   ['وين ألقى النماذج؟', 'كل النماذج الرسمية (خطة التدريب، المباشرة، التقرير الأسبوعي، الحضور، التقرير والتقييم النهائي) موجودة في موقع التدريب fieldtraining.imamu.edu.sa، ونسخ منها في قسم النماذج تحت.'],
   ['وين يكون التدريب؟', 'في جهات داخل مدينة الرياض، عشان مشرفك في الكلية يقدر يتابعك ويزورك.'],
-  ['وش المجالات المناسبة؟', 'أي مجال في تقنية المعلومات: الشبكات، تحليل الأنظمة، قواعد البيانات، البرمجة وتصميم الأنظمة، أمن المعلومات، والدعم التقني.'],
+  ['وش المجالات المناسبة؟', 'أي مجال له علاقة بتخصصك. مثلاً لطلاب تقنية المعلومات: الشبكات، تحليل الأنظمة، قواعد البيانات، البرمجة وتصميم الأنظمة، أمن المعلومات، والدعم التقني.'],
   ['أقدر أسجل مواد مع التدريب؟', 'التدريب يكون بتفرغ كامل. والخريج اللي باقي له مقرر واحد يقدر يسجله معه.'],
   ['بعد ما أنقبل، وش أسوي؟', 'ترسل للجهة نموذج المباشرة (جزء تعبّيه الجهة وجزء تعبّيه أنت، ومختوم)، ثم ترسله لإيميل وحدة التدريب عشان ينزلون لك المقرر، وتتابع إيميلك الجامعي لين يوصلك رد القبول.'],
   ['متى آخر موعد للمباشرة؟', 'كان نهاية يوم الخميس في الأسبوع الثاني من بداية التدريب، ومدّدوه بعدها إلى يوم الإثنين في الأسبوع الثالث. تأكد من الموعد مع وحدة التدريب كل ترم.'],
