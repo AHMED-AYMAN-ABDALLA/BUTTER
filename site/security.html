@@ -633,9 +633,9 @@ const CHAPTERS = [
       "q": "What is the difference between data confidentiality and privacy?",
       "o": [
        "Privacy lets individuals control what is collected and who can access it",
-       "Privacy means the system is always available",
-       "Confidentiality means the data may never change",
-       "They are exactly the same"
+       "Privacy means the system is always available to its users",
+       "Confidentiality means the data may never be changed by anyone",
+       "They are exactly the same thing with two different names"
       ],
       "a": 0,
       "e": "سرية البيانات تمنع الكشف لغير المصرح لهم، أما الخصوصية فتمكّن الفرد من التحكم في ما يُجمع من معلوماته ومن يصل إليها."
@@ -780,9 +780,9 @@ const CHAPTERS = [
       "q": "Why must systems keep records of their activities?",
       "o": [
        "To trace breaches, identify who is responsible, and resolve transaction disputes",
-       "To make the system faster",
-       "To avoid using passwords",
-       "To encrypt data automatically"
+       "To make the system run faster for all of its users at busy times",
+       "To avoid using passwords for the users who log in to the system",
+       "To encrypt all of the data automatically every night after work"
       ],
       "a": 0,
       "e": "السجلات تمكّن من تتبع الاختراقات وتحديد المسؤول وحل النزاعات."
@@ -911,9 +911,9 @@ const CHAPTERS = [
       "q": "What is the main idea to remember from these examples?",
       "o": [
        "The more important the information or service, the more protection it needs",
-       "All data needs the same protection",
-       "Only availability matters",
-       "Protection is needed only for passwords"
+       "All data needs exactly the same level of protection, whatever its value",
+       "Only the availability of the services really matters for the business",
+       "Protection is needed only for the passwords of users, nothing else"
       ],
       "a": 0,
       "e": "أهمية المعلومة أو الخدمة تحدد مستوى الحماية المطلوب."
@@ -988,9 +988,9 @@ const CHAPTERS = [
       "q": "In OSI security architecture, what is an attack?",
       "o": [
        "The problem we are trying to face",
-       "The protection method",
-       "The security provided",
-       "A kind of key"
+       "The protection method used",
+       "The security that is provided",
+       "A kind of secret key"
       ],
       "a": 0,
       "e": "الهجوم هو المشكلة التي نحاول مواجهتها.",
@@ -1003,9 +1003,9 @@ const CHAPTERS = [
       "q": "What is a security mechanism?",
       "o": [
        "The protection method used to face the problem",
-       "The problem itself",
-       "The security level provided",
-       "A network cable"
+       "The problem we are facing itself",
+       "The level of security that is provided",
+       "A network cable that carries the data"
       ],
       "a": 0,
       "e": "آلية الحماية هي الوسيلة المستخدمة لمواجهة المشكلة."
@@ -1014,9 +1014,9 @@ const CHAPTERS = [
       "q": "What is a security service?",
       "o": [
        "The security provided to the system using protection mechanisms",
-       "An attacker",
-       "A type of ciphertext",
-       "A hacking tool"
+       "An attacker who tries to break into the system from outside",
+       "A type of ciphertext produced by the encryption algorithm",
+       "A hacking tool that is used to test the system for weaknesses"
       ],
       "a": 0,
       "e": "الخدمة الأمنية هي الحماية التي تقدَّم للنظام باستخدام آليات الحماية."
@@ -1106,9 +1106,9 @@ const CHAPTERS = [
       "q": "What defines a passive attack?",
       "o": [
        "The attacker monitors or obtains information without changing the data",
-       "The attacker modifies messages",
-       "The attacker blocks the service",
-       "The attacker pretends to be another user"
+       "The attacker modifies the messages before they arrive at the receiver",
+       "The attacker blocks the service so the users cannot use it at all",
+       "The attacker pretends to be another user of the system to get access"
       ],
       "a": 0,
       "e": "في الهجوم السلبي لا يغيّر المهاجم البيانات، يكتفي بالمراقبة أو الحصول على المعلومات."
@@ -1133,9 +1133,9 @@ const CHAPTERS = [
       "q": "Why is traffic analysis still possible when messages are encrypted?",
       "o": [
        "The attacker observes who communicates, how often, message sizes and timing, not content",
-       "Encryption does not work on network traffic",
-       "The attacker breaks the key instantly",
-       "Encrypted messages are always readable"
+       "Encryption does not work on network traffic, so the content can be read",
+       "The attacker breaks the key instantly once enough messages are captured",
+       "Encrypted messages are always readable by anyone who sees the traffic"
       ],
       "a": 0,
       "e": "المهاجم لا يحتاج للمحتوى؛ يكفيه ملاحظة أنماط الاتصال: من ومع من وعدد الرسائل وحجمها ووقتها."
@@ -1261,9 +1261,9 @@ const CHAPTERS = [
       "q": "Which action belongs to modification of messages?",
       "o": [
        "Changing, delaying, or reordering a legitimate message",
-       "Reading a message silently",
-       "Blocking all users",
-       "Copying a file transfer"
+       "Reading a message silently on the network",
+       "Blocking all of the users from the service",
+       "Copying a file transfer to use it later on"
       ],
       "a": 0,
       "e": "تعديل الرسائل يشمل تغيير الرسالة أو تأخيرها أو تغيير ترتيبها."
@@ -1482,9 +1482,9 @@ const CHAPTERS = [
       "q": "What is plaintext?",
       "o": [
        "The original message before encryption",
-       "The encrypted message",
-       "The secret key",
-       "The algorithm"
+       "The encrypted message (ciphertext)",
+       "The secret key used for encryption",
+       "The encryption algorithm itself"
       ],
       "a": 0,
       "e": "النص الأصلي (Plaintext) هو الرسالة قبل التشفير. أما المشفرة فهي Ciphertext.",
@@ -1496,9 +1496,9 @@ const CHAPTERS = [
       "q": "What does the secret key do?",
       "o": [
        "Controls how the encryption is performed",
-       "Stores the ciphertext",
-       "Replaces the algorithm",
-       "Sends the message"
+       "Stores the ciphertext safely",
+       "Replaces the algorithm used",
+       "Sends the message to the receiver"
       ],
       "a": 0,
       "e": "المفتاح السري يحدد طريقة التشفير التي تنفذها الخوارزمية."
@@ -1610,9 +1610,9 @@ const CHAPTERS = [
       "q": "A strong algorithm means that an attacker with the ciphertext and some plaintext examples...",
       "o": [
        "Still cannot recover the plaintext or the key",
-       "Can always find the key",
-       "Can change the algorithm",
-       "Can decrypt without any key"
+       "Can always find the key from enough pairs",
+       "Can change the algorithm used by the sender",
+       "Can decrypt the message without any key"
       ],
       "a": 0,
       "e": "هذا هو شرط الخوارزمية القوية."
@@ -1621,9 +1621,9 @@ const CHAPTERS = [
       "q": "What must the sender and receiver do with the secret key?",
       "o": [
        "Obtain it securely and protect it",
-       "Publish it",
-       "Send it in plaintext",
-       "Change it into a hash"
+       "Publish it on a public website",
+       "Send it in plaintext by email",
+       "Change it into a hash value"
       ],
       "a": 0,
       "e": "يجب أن يحصلا على المفتاح بطريقة آمنة ويحميانه."
@@ -1703,9 +1703,9 @@ const CHAPTERS = [
       "q": "In a substitution cipher...",
       "o": [
        "Each element is replaced with another element",
-       "Elements are rearranged",
-       "Two keys are used",
-       "Data is processed in blocks"
+       "Elements are rearranged in a new order",
+       "Two different keys are used for each element",
+       "Data is processed in fixed blocks of bits"
       ],
       "a": 0,
       "e": "الاستبدال يغيّر كل عنصر بعنصر آخر، أما إعادة الترتيب فتغيّر مواضعها.",
@@ -1742,9 +1742,9 @@ const CHAPTERS = [
       "q": "A stream cipher processes data...",
       "o": [
        "Continuously, one element at a time",
-       "In fixed-size blocks",
-       "By rearranging blocks only",
-       "With two keys"
+       "In fixed-size blocks of bits",
+       "By rearranging the blocks only",
+       "With two keys, one per direction"
       ],
       "a": 0,
       "e": "التشفير المتدفق يعالج البيانات عنصرًا بعد عنصر بشكل مستمر."
@@ -1813,9 +1813,9 @@ const CHAPTERS = [
       "q": "A symmetric block cipher uses...",
       "o": [
        "The same key for encryption and decryption",
-       "A public and a private key",
-       "No key",
-       "A different key per block only"
+       "A public key and a private key",
+       "No key, only the algorithm",
+       "A different key for each block only"
       ],
       "a": 0,
       "e": "المتماثل يعني نفس المفتاح للتشفير وفك التشفير."
@@ -2169,9 +2169,9 @@ const CHAPTERS = [
       "q": "A key generator outputs 1,2,3,4,5... in order. Which requirement fails?",
       "o": [
        "Randomness and unpredictability",
-       "Neither, it is fine",
-       "Only block size",
-       "Only key length"
+       "Neither, the sequence is fine",
+       "Only the block size requirement",
+       "Only the key length requirement"
       ],
       "a": 0,
       "e": "التسلسل المنتظم له نمط واضح ويمكن توقع الرقم التالي، فلا يحقق الشرطين.",
@@ -2240,9 +2240,9 @@ const CHAPTERS = [
       "q": "What does uniform distribution mean here?",
       "o": [
        "Zeros and ones appear almost equally",
-       "All numbers are zero",
-       "The bits always alternate",
-       "The numbers are public"
+       "All the numbers in it are zero",
+       "The bits always alternate 0 and 1",
+       "The numbers are made public to all"
       ],
       "a": 0,
       "e": "التوزيع المتساوي: الأصفار والواحدات تظهر بشكل متقارب."
@@ -2251,9 +2251,9 @@ const CHAPTERS = [
       "q": "Independence means...",
       "o": [
        "One part of the sequence does not help us know another part",
-       "All parts are identical",
-       "The sequence repeats",
-       "The sequence is short"
+       "All parts of the sequence are exactly identical",
+       "The sequence repeats itself after a few numbers",
+       "The sequence is too short to be used for keys"
       ],
       "a": 0,
       "e": "الاستقلالية: الأرقام السابقة لا تساعد في معرفة التالية."
@@ -2344,9 +2344,9 @@ const CHAPTERS = [
       "q": "Which of these can be used to generate pseudorandom numbers?",
       "o": [
        "Symmetric block ciphers, asymmetric ciphers, hash functions and MACs",
-       "Only screen savers",
-       "Only passwords",
-       "Only network cables"
+       "Only screen savers and the movement of the mouse pointer",
+       "Only the passwords that the users type into the system",
+       "Only the network cables and the devices they connect to"
       ],
       "a": 0,
       "e": "ذكر الملف الأنواع الشائعة: التشفير المتماثل بالكتل، وغير المتماثل، ودوال التجزئة وMACs."
@@ -2464,9 +2464,9 @@ const CHAPTERS = [
       "q": "Why is this a security problem?",
       "o": [
        "It can reveal patterns in the message",
-       "It makes encryption slower",
-       "It requires two keys",
-       "It increases block size"
+       "It makes the encryption slower",
+       "It requires two separate keys",
+       "It increases the size of each block"
       ],
       "a": 0,
       "e": "المهاجم قد يلاحظ التكرار ويفهم بعض المعلومات عن النص."
@@ -2569,9 +2569,9 @@ const CHAPTERS = [
       "q": "In CBC, each later block is mixed with...",
       "o": [
        "The encrypted output of the previous block",
-       "The first plaintext block",
-       "The key",
-       "A random public number"
+       "The first plaintext block of the message only",
+       "The secret key itself, and nothing else",
+       "A random number that is made public"
       ],
       "a": 0,
       "e": "كل كتلة جديدة تُمزج مع ناتج تشفير الكتلة السابقة."
@@ -2580,9 +2580,9 @@ const CHAPTERS = [
       "q": "What does chain-linking achieve in CBC?",
       "o": [
        "It prevents repeating patterns and increases security",
-       "It removes the need for a key",
-       "It makes decryption impossible",
-       "It shortens the message"
+       "It removes the need for a secret key at all",
+       "It makes the decryption impossible for anyone",
+       "It shortens the message before it is encrypted"
       ],
       "a": 0,
       "e": "الربط المتسلسل يمنع تكرار الأنماط."
@@ -2674,9 +2674,9 @@ const CHAPTERS = [
       "q": "What does CFB start with?",
       "o": [
        "An initial value in a shift register",
-       "A counter value",
-       "Two keys",
-       "A hash digest"
+       "A counter value that increases",
+       "Two separate secret keys",
+       "A hash digest of the message"
       ],
       "a": 0,
       "e": "يبدأ CFB بقيمة ابتدائية في مسجل الإزاحة."
@@ -2696,9 +2696,9 @@ const CHAPTERS = [
       "q": "How does CFB decryption work?",
       "o": [
        "It uses the encryption operation itself with the secret key",
-       "It reverses the encryption box",
-       "It needs a separate decryption algorithm",
-       "It uses no key"
+       "It reverses the encryption box to get the plaintext back",
+       "It needs a separate decryption algorithm with another key",
+       "It uses no key at all, only the shift register value"
       ],
       "a": 0,
       "e": "في CFB تُستخدم عملية التشفير نفسها في فك التشفير وليس عملية عكسية.",
@@ -2840,9 +2840,9 @@ const CHAPTERS = [
       "q": "Which chain describes CTR?",
       "o": [
        "Number, encrypt, secret value, mix with message, encrypted message",
-       "Message, hash, digest, sign, signature",
-       "Block, shift register, feedback, block",
-       "Key, certificate, CA, user"
+       "Message, hash, digest, sign, then the signature",
+       "Block, shift register, feedback, then the next block",
+       "Key, certificate, CA, user, then the directory"
       ],
       "a": 0,
       "e": "هذه هي الفكرة الرئيسية لنمط العداد."
@@ -2913,9 +2913,9 @@ const CHAPTERS = [
       "q": "Why can CTR encryption be very fast after the plaintext arrives?",
       "o": [
        "Preprocessing was done earlier, so only XOR is needed",
-       "It skips the key",
-       "It uses a smaller message",
-       "It removes the counter"
+       "It skips the key for all of the later blocks",
+       "It uses a smaller message than the other modes",
+       "It removes the counter from the whole process"
       ],
       "a": 0,
       "e": "يمكن تنفيذ التشفير مسبقًا، وعند وصول النص يكفي XOR."
@@ -2924,9 +2924,9 @@ const CHAPTERS = [
       "q": "What does random access mean in CTR?",
       "o": [
        "Any block can be processed independently",
-       "Blocks are shuffled randomly",
-       "The key is random",
-       "The message is random"
+       "Blocks are shuffled randomly before sending",
+       "The key is chosen randomly for each block",
+       "The message itself is random data"
       ],
       "a": 0,
       "e": "تفك كتلة معينة دون معالجة الكتل السابقة."
@@ -2946,9 +2946,9 @@ const CHAPTERS = [
       "q": "Why is CTR efficient in hardware?",
       "o": [
        "Encryption and decryption can be done in parallel",
-       "It uses a shift register",
-       "It needs fewer keys",
-       "It uses larger blocks"
+       "It uses a shift register for each of the blocks",
+       "It needs fewer keys than the other block modes",
+       "It uses larger blocks than the other block modes"
       ],
       "a": 0,
       "e": "التوازي يرفع سرعة المعالجة."
@@ -3041,9 +3041,9 @@ const CHAPTERS = [
       "q": "What does message authentication verify?",
       "o": [
        "That the content has not changed and the message came from the genuine sender",
-       "That the network is fast",
-       "That the key is long",
-       "That the message is short"
+       "That the network is fast enough to deliver the message on time",
+       "That the key used by the sender is long enough to be secure",
+       "That the message is short enough to be sent in a single packet"
       ],
       "a": 0,
       "e": "الهدف: التأكد من المحتوى ومن المرسل."
@@ -3052,9 +3052,9 @@ const CHAPTERS = [
       "q": "What does authentication using conventional encryption provide?",
       "o": [
        "Authentication and confidentiality",
-       "Authentication only",
-       "Confidentiality only",
-       "Neither"
+       "Authentication only, not confidentiality",
+       "Confidentiality only, not authentication",
+       "Neither authentication nor confidentiality"
       ],
       "a": 0,
       "e": "لأن الرسالة مشفرة بمفتاح مشترك، تتحقق السرية والتوثيق معًا."
@@ -3171,9 +3171,9 @@ const CHAPTERS = [
       "q": "What is the main idea of sending a digest with the message?",
       "o": [
        "Detect whether the message has been changed",
-       "Hide the message",
-       "Make the message shorter",
-       "Replace the sender"
+       "Hide the content of the message from others",
+       "Make the message shorter so it is quicker to send",
+       "Replace the sender with another trusted sender"
       ],
       "a": 0,
       "e": "الملخص يساعد في اكتشاف تغيير الرسالة."
@@ -3182,9 +3182,9 @@ const CHAPTERS = [
       "q": "Secure hash functions are used for...",
       "o": [
        "Message authentication and digital signatures",
-       "Image editing",
-       "Memory management",
-       "Key generation only"
+       "Image editing and adding photo filters",
+       "Memory management in the operating system",
+       "Key generation only, and nothing else"
       ],
       "a": 0,
       "e": "تُستخدم في توثيق الرسائل والتوقيعات الرقمية."
@@ -3298,9 +3298,9 @@ const CHAPTERS = [
       "q": "What does the main idea describe?",
       "o": [
        "A unique data fingerprint that is difficult to reverse or duplicate",
-       "A long secret key",
-       "A two-way encryption",
-       "A network protocol"
+       "A long secret key that is shared by the two parties",
+       "A two-way encryption that can always be reversed",
+       "A network protocol for sending messages between hosts"
       ],
       "a": 0,
       "e": "الفكرة الأساسية: بصمة فريدة للبيانات يصعب عكسها أو تكرارها."
@@ -3398,9 +3398,9 @@ const CHAPTERS = [
       "q": "What replaced SHA-1?",
       "o": [
        "The stronger SHA-2 algorithms",
-       "MD5",
-       "DES",
-       "RSA"
+       "The older MD5 hash",
+       "The DES block cipher",
+       "The RSA public keys"
       ],
       "a": 0,
       "e": "تم الانتقال إلى SHA-2 الأكثر أمانًا."
@@ -3409,9 +3409,9 @@ const CHAPTERS = [
       "q": "Which hash sizes must SHA-3 support?",
       "o": [
        "224, 256, 384 and 512 bits",
-       "56 and 64 bits",
-       "128 and 192 bits",
-       "160 bits only"
+       "56 and 64 bits only",
+       "128 and 192 bits only",
+       "160 bits only, like SHA-1"
       ],
       "a": 0,
       "e": "المتطلب: دعم أحجام 224 و256 و384 و512 بت."
@@ -3521,9 +3521,9 @@ const CHAPTERS = [
       "q": "Which is a design objective of HMAC?",
       "o": [
        "Use existing hash functions without modifying them",
-       "Create a brand new hash function",
-       "Avoid using secret keys",
-       "Make the hash slower"
+       "Create a brand new hash function for each use",
+       "Avoid using any secret keys in the computation",
+       "Make the hash computation slower to stop attacks"
       ],
       "a": 0,
       "e": "من الأهداف: استخدام دوال التجزئة الموجودة بدون تعديلها."
@@ -3532,9 +3532,9 @@ const CHAPTERS = [
       "q": "Where is HMAC used?",
       "o": [
        "Internet security protocols such as IP Security and TLS",
-       "Only in image editors",
-       "Only in DES",
-       "Only in word processors"
+       "Only in image editors and photo software",
+       "Only in the DES block cipher algorithm",
+       "Only in word processors and office documents"
       ],
       "a": 0,
       "e": "يُستخدم في IPsec وTLS."
@@ -3608,9 +3608,9 @@ const CHAPTERS = [
       "q": "What does CCM provide?",
       "o": [
        "Confidentiality and authenticity at the same time",
-       "Only authentication",
-       "Only confidentiality",
-       "Only key exchange"
+       "Only authentication of the sender",
+       "Only confidentiality of the data sent",
+       "Only key exchange between the users"
       ],
       "a": 0,
       "e": "CCM نمط تشفير موثق: سرية وتحقق من الصحة معًا."
@@ -3747,9 +3747,9 @@ const CHAPTERS = [
       "q": "Which statement is a misconception?",
       "o": [
        "Public-key encryption is always more secure than conventional encryption",
-       "It uses two keys",
-       "It is asymmetric",
-       "Key distribution still needs care"
+       "It uses two keys, a public one and a private one for each user",
+       "It is asymmetric, because the two keys of each user are different",
+       "Key distribution still needs care, even when public keys are used"
       ],
       "a": 0,
       "e": "الملف يوضح أنه ليس بالضرورة أكثر أمانًا ضد تحليل التشفير."
@@ -3882,9 +3882,9 @@ const CHAPTERS = [
       "q": "Which are the three main applications?",
       "o": [
        "Encryption/decryption, digital signature, key exchange",
-       "Hashing, compression, routing",
-       "Substitution, transposition, stream",
-       "DES, AES, 3DES"
+       "Hashing, compression and network routing",
+       "Substitution, transposition and stream",
+       "DES, AES and Triple DES (3DES) ciphers"
       ],
       "a": 0,
       "e": "الفئات الثلاث الرئيسية: التشفير وفك التشفير، التوقيع الرقمي، تبادل المفاتيح."
@@ -3953,9 +3953,9 @@ const CHAPTERS = [
       "q": "What is Diffie-Hellman used for?",
       "o": [
        "Securely exchanging a secret key between two users",
-       "Encrypting long messages directly",
-       "Signing documents",
-       "Hashing files"
+       "Encrypting long messages directly between users",
+       "Signing documents so the sender is known",
+       "Hashing files to detect any changes in them"
       ],
       "a": 0,
       "e": "الخوارزمية نفسها تقتصر على تبادل المفتاح."
@@ -3964,9 +3964,9 @@ const CHAPTERS = [
       "q": "What does Diffie-Hellman security depend on?",
       "o": [
        "The difficulty of computing discrete logarithms",
-       "Hiding the algorithm",
-       "The size of the message",
-       "A public directory"
+       "Hiding the algorithm from all attackers",
+       "The size of the message being sent",
+       "A public directory of all of the users"
       ],
       "a": 0,
       "e": "تعتمد على صعوبة حساب اللوغاريتمات المتقطعة."
@@ -3975,9 +3975,9 @@ const CHAPTERS = [
       "q": "What was special about Diffie-Hellman historically?",
       "o": [
        "It was the first publicly published key exchange algorithm",
-       "It was the first hash function",
-       "It was the first block cipher",
-       "It was the first digital certificate"
+       "It was the first publicly published hash function",
+       "It was the first publicly published block cipher",
+       "It was the first digital certificate scheme used"
       ],
       "a": 0,
       "e": "هي أول خوارزمية لتبادل المفاتيح تُنشر علنًا."
@@ -4067,9 +4067,9 @@ const CHAPTERS = [
       "q": "What does a digital signature verify?",
       "o": [
        "Origin, integrity, and non-repudiation",
-       "Only the file size",
-       "Only the key length",
-       "Only availability"
+       "Only the size of the file",
+       "Only the length of the key",
+       "Only the availability of data"
       ],
       "a": 0,
       "e": "يتحقق من مصدر البيانات وسلامتها وعدم إنكار الموقّع."
@@ -4200,9 +4200,9 @@ const CHAPTERS = [
       "q": "What is the main advantage of ECC over RSA?",
       "o": [
        "Similar security with a much smaller key size",
-       "A much larger key size",
-       "No keys at all",
-       "Faster hash computation"
+       "A much larger key size for the same security",
+       "No keys at all, only the curve equation",
+       "Faster hash computation than RSA can do"
       ],
       "a": 0,
       "e": "يوفر مستوى أمان مشابهًا بحجم مفتاح أصغر بكثير."
@@ -4222,9 +4222,9 @@ const CHAPTERS = [
       "q": "What is the caution about ECC mentioned in the chapter?",
       "o": [
        "Confidence in ECC is not yet as high as in RSA",
-       "It cannot be used for signatures",
-       "It has no mathematical basis",
-       "It uses DES"
+       "It cannot be used for digital signatures",
+       "It has no mathematical basis behind it",
+       "It uses DES internally for encryption"
       ],
       "a": 0,
       "e": "الثقة في ECC ما زالت أقل من RSA."
@@ -4317,9 +4317,9 @@ const CHAPTERS = [
       "q": "In key distribution, what is the main problem?",
       "o": [
        "Delivering the key to the other party securely, without an attacker getting it",
-       "Making the encryption algorithm run faster",
-       "Choosing a key that is easy to remember",
-       "Storing encrypted data on a larger disk"
+       "Making the encryption algorithm run faster on the sender’s computer",
+       "Choosing a key that is easy for both users to remember and type",
+       "Storing the encrypted data on a larger disk for both of the parties"
       ],
       "a": 0,
       "e": "التشفير يحتاج مفتاحًا سريًا عند الطرفين، والمشكلة الحقيقية هي كيف أوصل هذا المفتاح للطرف الآخر بدون أن يلتقطه مهاجم في الطريق. لو وصل المفتاح لشخص ثالث فقد التشفير قيمته كلها.",
@@ -4333,9 +4333,9 @@ const CHAPTERS = [
       "q": "Which sentence defines authentication?",
       "o": [
        "Verifying that a user or system entity is really who they claim to be",
-       "Deciding which files a user may open",
-       "Converting plaintext into ciphertext",
-       "Making a backup copy of the user data"
+       "Deciding which files and folders a user is allowed to open and change",
+       "Converting the plaintext into ciphertext using the user’s secret key",
+       "Making a backup copy of the data of every user in the system each day"
       ],
       "a": 0,
       "e": "المصادقة (Authentication) تعني التأكد أن المستخدم أو النظام هو فعلًا من يدّعي أنه. أما تحديد ما يحق له فعله فمرحلة لاحقة اسمها Authorization.",
@@ -4359,9 +4359,9 @@ const CHAPTERS = [
       "q": "Why is authentication considered an important security mechanism?",
       "o": [
        "It helps the system determine who the user is and whether that identity is valid",
-       "It makes the network cable faster",
-       "It removes the need for encryption keys",
-       "It guarantees that no password can ever be stolen"
+       "It makes the network cable faster for all of the users of the system",
+       "It removes the need for any encryption keys anywhere in the system",
+       "It guarantees that no password can ever be stolen by any of the attackers"
       ],
       "a": 0,
       "e": "المصادقة تساعد النظام على معرفة من هو المستخدم والتأكد من صحة هويته قبل أن يسمح له بالوصول إلى الموارد.",
@@ -4454,9 +4454,9 @@ const CHAPTERS = [
       "q": "After the ID is entered, the system asks for a password. What is the role of the password?",
       "o": [
        "Evidence used in verification to prove that the person owns the claimed identity",
-       "A second claim of identity",
-       "A way to encrypt the username",
-       "A list of permissions for the user"
+       "A second claim of identity, made after the user ID has been typed in",
+       "A way to encrypt the username before it is sent across to the server",
+       "A list of all the permissions that the user has inside the system"
       ],
       "a": 0,
       "e": "كلمة المرور هي الدليل الذي يحتاجه النظام في خطوة التحقق ليثبت أن الشخص فعلًا صاحب الهوية التي ذكرها.",
@@ -4493,9 +4493,9 @@ const CHAPTERS = [
       "q": "Which statement correctly matches the two terms?",
       "o": [
        "Identification: I tell the system who I am. Authentication: the system verifies that I really am that person.",
-       "Identification: the system verifies me. Authentication: I tell the system who I am.",
-       "Identification and authentication mean exactly the same thing.",
-       "Identification happens only after the system grants access."
+       "Identification: the system verifies that I am that person. Authentication: I tell the system who I am.",
+       "Identification and authentication mean exactly the same thing, so either term can be used.",
+       "Identification happens only after the system grants access, and authentication comes later."
       ],
       "a": 0,
       "e": "التعريف: أنا أقول للنظام من أنا. المصادقة: النظام يتأكد أنني فعلًا الشخص الذي أدّعيه. الأولى ادعاء والثانية تحقق.",
@@ -4561,9 +4561,9 @@ const CHAPTERS = [
       "q": "In the NIST model, what does the system try to build after the user presents an identity?",
       "o": [
        "Confidence that the identity actually belongs to the person using it",
-       "A new encryption key for the user",
-       "A list of all other users",
-       "A plaintext copy of the password"
+       "A new encryption key for the session of the user",
+       "A list of all the other users who use the system",
+       "A plaintext copy of the password of the user"
       ],
       "a": 0,
       "e": "النظام يحاول بناء الثقة بأن هذه الهوية تعود فعلًا إلى الشخص الذي يستخدمها، وهذا هو جوهر المصادقة."
@@ -4610,9 +4610,9 @@ const CHAPTERS = [
       "q": "Which of these describes where authentication can take place?",
       "o": [
        "Open networks like the Internet and local networks like a university network",
-       "Only on the Internet",
-       "Only inside a company network",
-       "Only at physical doors"
+       "Only on the Internet, never on any of the local networks",
+       "Only inside a company network, never on the open Internet",
+       "Only at physical doors and gates that have card readers"
       ],
       "a": 0,
       "e": "المصادقة تتم عبر الشبكات المفتوحة (الإنترنت) وعبر الشبكات المحلية (جامعة أو شركة).",
@@ -4732,9 +4732,9 @@ const CHAPTERS = [
       "q": "Why must authentication come before authorization?",
       "o": [
        "Permissions are decided based on the user identity, so the identity must be verified first",
-       "Because authorization is faster than authentication",
-       "Because authentication is optional",
-       "Because the key must be changed first"
+       "Because authorization is faster than authentication, so it should always wait",
+       "Because authentication is optional and can be skipped by some of the users",
+       "Because the encryption key must be changed before any access can be given"
       ],
       "a": 0,
       "e": "الصلاحيات تُحدد بناءً على هوية المستخدم، ولا يمكن تحديدها قبل التأكد من هذه الهوية.",
@@ -4806,9 +4806,9 @@ const CHAPTERS = [
       "q": "Which pair is correct?",
       "o": [
        "Applicant: wants to register. Claimant: tries to access and proves they own the credential.",
-       "Applicant: tries to access. Claimant: wants to register.",
-       "Applicant: issues credentials. Claimant: checks credentials.",
-       "Applicant: decides to allow access. Claimant: issues credentials."
+       "Applicant: tries to access the system. Claimant: wants to register as a new user.",
+       "Applicant: issues the credentials to users. Claimant: checks the credentials.",
+       "Applicant: decides to allow the access. Claimant: issues the credentials to users."
       ],
       "a": 0,
       "e": "المتقدم (Applicant) هو من يريد التسجيل في النظام. أما المستخدم (Claimant) فيحاول الدخول ويقدّم وسيلة الإثبات التي يملكها.",
@@ -4821,9 +4821,9 @@ const CHAPTERS = [
       "q": "Which role checks and confirms the person's identity during registration?",
       "o": [
        "Registration Authority",
-       "Verifier",
+       "Verifier (checker)",
        "Relying Party",
-       "Claimant"
+       "Claimant (user)"
       ],
       "a": 0,
       "e": "جهة التسجيل (Registration Authority) تتأكد أن الشخص فعلًا هو من يدّعي قبل إصدار أي وسيلة اعتماد له.",
@@ -5004,9 +5004,9 @@ const CHAPTERS = [
       "q": "A bank asks for a PIN and also a smart card to log in. What does this show?",
       "o": [
        "Two methods used together to make identity verification more secure",
-       "A mistake, because only one method can be used",
-       "Authorization instead of authentication",
-       "A key distribution method"
+       "A mistake, because only one method can be used to log in",
+       "Authorization instead of authentication of the bank customer",
+       "A key distribution method used by the bank for its customers"
       ],
       "a": 0,
       "e": "الرقم السري (شيء تعرفه) والبطاقة (شيء تملكه) طريقتان استُخدمتا معًا لرفع مستوى الأمان.",
@@ -5099,9 +5099,9 @@ const CHAPTERS = [
       "q": "Why is it better to change the key frequently?",
       "o": [
        "If an attacker gets the key, only a limited amount of data is compromised",
-       "Because keys wear out like batteries",
-       "Because it makes the key shorter",
-       "Because it removes the need to protect the key"
+       "Because keys wear out like batteries after being used for a while",
+       "Because changing it often makes the key shorter and much faster",
+       "Because changing it removes the need to protect the key at all"
       ],
       "a": 0,
       "e": "تغيير المفتاح بشكل مستمر يحدّ من الضرر: لو حصل المهاجم على المفتاح لا يصل إلا لكمية محدودة من البيانات المشفرة به.",
@@ -5123,9 +5123,9 @@ const CHAPTERS = [
       "q": "Key distribution means...",
       "o": [
        "Delivering the key safely to both parties without allowing others to see or obtain it",
-       "Generating a longer key",
-       "Deleting old keys from memory",
-       "Encrypting a file with two algorithms"
+       "Generating a longer key for the users, so that it is much harder to guess",
+       "Deleting the old keys from the memory of the two systems after they are used",
+       "Encrypting a file with two different algorithms, one after the other, for safety"
       ],
       "a": 0,
       "e": "توزيع المفتاح هو طريقة إيصال المفتاح للطرفين بشكل آمن دون أن يراه أو يحصل عليه أي شخص آخر."
@@ -5134,9 +5134,9 @@ const CHAPTERS = [
       "q": "Company X uses the same key for a whole year. Company Y changes its key every day. A thief steals the current key today. Who loses less data?",
       "o": [
        "Company Y, because the stolen key exposes only a limited amount of data",
-       "Company X, because it has a longer-lived key",
-       "Both lose the same amount",
-       "Neither, because symmetric keys cannot be stolen"
+       "Company X, because a key that is used for longer becomes stronger",
+       "Both companies lose exactly the same amount of data in the attack",
+       "Neither of them, because symmetric keys can never be stolen at all"
       ],
       "a": 0,
       "e": "شركة Y تغيّر مفتاحها باستمرار، فالمفتاح المسروق لا يكشف إلا بيانات فترة قصيرة. أما X فمفتاحها الواحد يغطي بيانات سنة كاملة.",
@@ -5242,9 +5242,9 @@ const CHAPTERS = [
       "q": "What does the fourth method require?",
       "o": [
        "A and B each have an encrypted connection with a third party C, who sends the new key through those connections",
-       "A and B already share an old key",
-       "A and B must meet physically",
-       "Nothing, it works without any prior secure connection"
+       "A and B already share an old key, and they use it to encrypt and send the new key to each other",
+       "A and B must meet physically, so A can hand the new key to B on a disk or on paper",
+       "Nothing, it works without any prior secure connection between A, B or any third party"
       ],
       "a": 0,
       "e": "الطريقة الرابعة تحتاج أن يكون لكل من أ وب اتصال مشفر مع طرف ثالث ج، وج يرسل المفتاح الجديد من خلال هذه الاتصالات.",
@@ -5272,9 +5272,9 @@ const CHAPTERS = [
       "q": "What do all four methods have in common?",
       "o": [
        "They aim to deliver the key to both parties without anyone else getting it",
-       "They all need a physical meeting",
-       "They all use a third party",
-       "They all avoid using keys"
+       "They all need a physical meeting between the two parties first",
+       "They all use a trusted third party to send the key to them",
+       "They all avoid using any keys between the two parties at all"
       ],
       "a": 0,
       "e": "كل الطرق هدفها واحد: إيصال المفتاح للطرفين بدون أن يحصل عليه شخص آخر.",
@@ -5356,9 +5356,9 @@ const CHAPTERS = [
       "q": "Why is option 3 (using an old key to send the new key) risky?",
       "o": [
        "If an attacker gets one key, all subsequent keys are revealed",
-       "The old key is always too short",
-       "It requires a third party",
-       "It cannot be used for end-to-end encryption"
+       "The old key is always too short to protect the new key",
+       "It requires a trusted third party to send the old key",
+       "It cannot be used together with end-to-end encryption"
       ],
       "a": 0,
       "e": "في الخيار 3 يُشفَّر كل مفتاح جديد بالمفتاح القديم، فإذا حصل المهاجم على مفتاح واحد يستطيع كشف كل المفاتيح اللاحقة تباعًا.",
@@ -5372,9 +5372,9 @@ const CHAPTERS = [
       "q": "What is a session key?",
       "o": [
        "A one-time key used to encrypt user data during one logical connection, then destroyed",
-       "A key used only to distribute other keys",
-       "A key stored permanently on the KDC only",
-       "A key that identifies the user to the CA"
+       "A key used only to distribute other keys, and kept for a long time on each system",
+       "A key stored permanently on the KDC only, and never sent to any of the users",
+       "A key that identifies the user to the certificate authority (CA) for certificates"
       ],
       "a": 0,
       "e": "مفتاح الجلسة يُستخدم لتشفير بيانات المستخدم طوال اتصال واحد ثم يُتلف. أما المفتاح الذي يُستخدم لتوزيع المفاتيح فهو المفتاح الدائم.",
@@ -5387,8 +5387,8 @@ const CHAPTERS = [
       "o": [
        "To distribute session keys between entities",
        "To encrypt all user data directly",
-       "To sign certificates",
-       "To replace the KDC"
+       "To sign the public-key certificates",
+       "To replace the KDC in the network"
       ],
       "a": 0,
       "e": "المفتاح الدائم يُستخدم بين الكيانات لغرض واحد: توزيع مفاتيح الجلسات بأمان. أما البيانات فتُشفَّر بمفتاح الجلسة.",
@@ -5400,9 +5400,9 @@ const CHAPTERS = [
       "q": "What does the KDC provide when it grants permission for two systems to communicate?",
       "o": [
        "A one-time session key for that connection",
-       "A public-key certificate",
-       "A new password for each user",
-       "A revocation list"
+       "A public-key certificate for both",
+       "A new password for each of the users",
+       "A certificate revocation list (CRL)"
       ],
       "a": 0,
       "e": "عند السماح بالاتصال يعطي KDC الطرفين مفتاح جلسة لمرة واحدة خاصًا بهذا الاتصال."
@@ -5480,9 +5480,9 @@ const CHAPTERS = [
       "q": "Kerberos is a system used for...",
       "o": [
        "Key distribution and user authentication",
-       "Compressing network traffic",
-       "Designing web pages",
-       "Scanning for viruses"
+       "Compressing the network traffic",
+       "Designing and hosting web pages",
+       "Scanning computers for viruses"
       ],
       "a": 0,
       "e": "كيربيروس نظام لتوزيع المفاتيح والتحقق من هوية المستخدمين."
@@ -5603,9 +5603,9 @@ const CHAPTERS = [
       "q": "Why does Kerberos use a centralized authentication server?",
       "o": [
        "So authentication is not built separately into every server",
-       "Because servers cannot use encryption",
-       "To avoid using any keys",
-       "Because workstations are fully trusted"
+       "Because servers cannot use encryption at all",
+       "To avoid using any keys in the network",
+       "Because workstations are fully trusted by servers"
       ],
       "a": 0,
       "e": "الفكرة أن كل خادم لا يحتاج لبناء بروتوكول مصادقة معقد؛ يوجد خادم مركزي واحد يوثّق المستخدمين للخوادم والخوادم للمستخدمين.",
@@ -5745,9 +5745,9 @@ const CHAPTERS = [
       "q": "What does the user do with the ticket?",
       "o": [
        "Uses it to request access to other services from the Ticket Granting Server",
-       "Sends it to an attacker",
-       "Uses it to encrypt the password",
-       "Throws it away after login"
+       "Sends it to the attacker so the attacker can get access",
+       "Uses it to encrypt the password again before sending it",
+       "Throws it away right after the first login is complete"
       ],
       "a": 0,
       "e": "يستخدم المستخدم التذكرة لطلب الوصول إلى الخدمات الأخرى من خادم منح التذاكر."
@@ -5876,9 +5876,9 @@ const CHAPTERS = [
       "q": "What does the symbol || represent?",
       "o": [
        "Concatenation: placing items one after another",
-       "Encryption",
-       "A server name",
-       "A time limit"
+       "Encryption with a secret key",
+       "A field holding the server name",
+       "A time limit on the tickets"
       ],
       "a": 0,
       "e": "الرمز || يعني الضم، أي وضع العناصر وراء بعض مثل IDc || TS."
@@ -5901,9 +5901,9 @@ const CHAPTERS = [
       "q": "What is the role of the Authenticator?",
       "o": [
        "To prove that the sender is the real owner of the ticket",
-       "To store the user's password",
-       "To encrypt the database",
-       "To select the Kerberos realm"
+       "To store the password of the user for later use",
+       "To encrypt the whole Kerberos database of the realm",
+       "To select the Kerberos realm that the user belongs to"
       ],
       "a": 0,
       "e": "الـ Authenticator يُرسل مع التذكرة ليثبت أن من يستخدمها هو صاحبها فعلًا وليس شخصًا سرقها."
@@ -5912,9 +5912,9 @@ const CHAPTERS = [
       "q": "What is a timestamp (TS) used for?",
       "o": [
        "To show a message is recent and not an old message replayed",
-       "To name the user",
-       "To store the session key",
-       "To list revoked tickets"
+       "To give the name of the user who sent it",
+       "To store the session key safely in the ticket",
+       "To list the tickets that have been revoked"
       ],
       "a": 0,
       "e": "الطابع الزمني يساعد على معرفة أن الرسالة حديثة وليست رسالة قديمة أعاد المهاجم إرسالها."
@@ -6025,9 +6025,9 @@ const CHAPTERS = [
       "q": "What is the purpose of message 6?",
       "o": [
        "The server proves its identity to the client (mutual authentication)",
-       "The client requests a TGT",
-       "The AS issues a ticket",
-       "The TGS verifies the client"
+       "The client requests a ticket-granting ticket from the AS",
+       "The authentication server issues a ticket to the client",
+       "The TGS verifies the identity of the client before access"
       ],
       "a": 0,
       "e": "الرسالة 6 اختيارية، فيها يثبت الخادم هويته للعميل بإرسال Timestamp + 1، وهذا هو المصادقة المتبادلة."
@@ -6119,9 +6119,9 @@ const CHAPTERS = [
       "q": "Why is message 2 encrypted with Kc (based on the user's password)?",
       "o": [
        "To let the AS and client verify the password and protect the message contents",
-       "To make the ticket reusable",
-       "To synchronize clocks",
-       "To list revoked tickets"
+       "To make the ticket reusable for many different services at once",
+       "To synchronize the clocks of the client and the authentication server",
+       "To list all of the tickets that have been revoked for the client"
       ],
       "a": 0,
       "e": "التشفير بمفتاح مبني على كلمة المرور يسمح لـ AS والعميل بالتحقق منها ويحمي محتوى الرسالة 2."
@@ -6130,9 +6130,9 @@ const CHAPTERS = [
       "q": "Why are tickets made reusable?",
       "o": [
        "So the user does not have to re-enter the password for every access",
-       "To allow any workstation to use them",
-       "To avoid using encryption",
-       "To remove the need for a TGS"
+       "To allow any workstation to use the same ticket as the user",
+       "To avoid using encryption for all of the later requests",
+       "To remove the need for a ticket-granting server in the realm"
       ],
       "a": 0,
       "e": "التذاكر القابلة لإعادة الاستخدام تقلل عدد مرات إدخال كلمة المرور، فلا يطلب النظام كلمة المرور مع كل وصول.",
@@ -6144,9 +6144,9 @@ const CHAPTERS = [
       "q": "What does ADc (client address) prevent?",
       "o": [
        "Using the ticket from a workstation other than the one that requested it",
-       "Replaying an old timestamp only",
-       "Changing the lifetime of the ticket",
-       "Encrypting message 1"
+       "Replaying an old timestamp only, but not the whole ticket",
+       "Changing the lifetime of the ticket after it has been issued",
+       "Encrypting message 1 with the secret key of the client"
       ],
       "a": 0,
       "e": "ADc يجب أن يطابق عنوان الجهاز الذي طلب التذكرة، فلا يمكن استخدام التذكرة من جهاز آخر."
@@ -6244,9 +6244,9 @@ const CHAPTERS = [
       "q": "What is a Kerberos realm?",
       "o": [
        "A group of managed computers sharing the same Kerberos database",
-       "A single ticket valid for 8 hours",
-       "A type of encryption algorithm",
-       "A list of revoked certificates"
+       "A single ticket that is valid for eight hours for all services",
+       "A type of encryption algorithm that is used inside Kerberos",
+       "A list of revoked certificates that is kept by the server"
       ],
       "a": 0,
       "e": "العالم (realm) هو مجموعة أجهزة مُدارة تعمل مع بعضها وتستخدم نفس قاعدة بيانات Kerberos."
@@ -6378,9 +6378,9 @@ const CHAPTERS = [
       "q": "What is a Kerberos principal?",
       "o": [
        "The identity of a user or service known to the Kerberos system",
-       "A type of ticket",
-       "The master computer",
-       "An encryption algorithm"
+       "A type of ticket that is given by the TGS",
+       "The master computer that controls the realm",
+       "An encryption algorithm that is used by Kerberos"
       ],
       "a": 0,
       "e": "الـ principal هو هوية مستخدم أو خدمة مسجّلة داخل Kerberos، ولكل منها اسم خاص يميزها."
@@ -6400,9 +6400,9 @@ const CHAPTERS = [
       "q": "What does the instance name identify?",
       "o": [
        "A specific type or instance of the user or service",
-       "The realm of the user",
-       "The master password",
-       "The ticket lifetime"
+       "The realm that the user belongs to",
+       "The master password of the server",
+       "The lifetime of the ticket that is issued"
       ],
       "a": 0,
       "e": "اسم الحالة (instance) يحدد حالة أو نوعًا معينًا للمستخدم أو الخدمة. أما العالم فيحدده الجزء الثالث (realm name).",
@@ -6480,9 +6480,9 @@ const CHAPTERS = [
       "q": "Which is an environmental shortcoming of Kerberos v4?",
       "o": [
        "Dependence on a specific encryption system",
-       "Password attacks",
-       "Double encryption",
-       "PCBC encryption"
+       "Password guessing attacks",
+       "Double encryption of tickets",
+       "PCBC encryption mode"
       ],
       "a": 0,
       "e": "الاعتماد على نظام تشفير محدد (DES) من القصور البيئي. أما التشفير المزدوج وPCBC وهجمات كلمات المرور ومفاتيح الجلسات فهي من العيوب التقنية.",
@@ -6636,9 +6636,9 @@ const CHAPTERS = [
       "q": "What is the Nonce in Kerberos v5 message 1 used for?",
       "o": [
        "To make sure the response is fresh and not replayed by an opponent",
-       "To select the encryption algorithm",
-       "To name the realm",
-       "To set the ticket lifetime"
+       "To select the encryption algorithm used for the reply",
+       "To give the name of the realm that the client belongs to",
+       "To set the lifetime of the ticket that will be issued"
       ],
       "a": 0,
       "e": "الـ Nonce قيمة عشوائية تتكرر في الرسالة 2 لتأكيد أن الرد حديث وليس معادًا من مهاجم."
@@ -6647,9 +6647,9 @@ const CHAPTERS = [
       "q": "What do the Times fields (from, till, rtime) request?",
       "o": [
        "Ticket start time, expiration time, and renew-till time",
-       "The client address",
-       "The server password",
-       "The CA certificate"
+       "The network address of the client machine",
+       "The password of the server and the realm",
+       "The certificate of the certificate authority"
       ],
       "a": 0,
       "e": "from وقت البدء المطلوب، till وقت الانتهاء المطلوب، rtime وقت التجديد المطلوب للتذكرة."
@@ -6658,9 +6658,9 @@ const CHAPTERS = [
       "q": "What do Options request in message 1?",
       "o": [
        "That certain flags be set in the returned ticket",
-       "That the realm be changed",
-       "That the database be copied",
-       "That the password be reset"
+       "That the realm of the client be changed",
+       "That the database be copied to the client",
+       "That the password of the client be reset"
       ],
       "a": 0,
       "e": "الـ Options تطلب تفعيل flags معينة في التذكرة المرجعة، وهي تضيف وظائف جديدة مهمة للإصدار 5."
@@ -6669,9 +6669,9 @@ const CHAPTERS = [
       "q": "Why is the timestamp not incremented by one in v5 message 6?",
       "o": [
        "An opponent cannot create message 6 without the right encryption keys",
-       "Because timestamps are no longer used",
-       "Because mutual authentication was removed",
-       "Because the nonce replaces the ticket"
+       "Because timestamps are no longer used in version 5 messages",
+       "Because mutual authentication was removed from version 5",
+       "Because the nonce replaces the ticket in the version 5 reply"
       ],
       "a": 0,
       "e": "شكل الرسائل في v5 يمنع المهاجم من بناء الرسالة 6 دون معرفة المفاتيح، فلا حاجة لإضافة 1.",
@@ -6755,9 +6755,9 @@ const CHAPTERS = [
       "q": "What are the two aspects of using public-key encryption for key distribution?",
       "o": [
        "Distributing public keys and using public-key encryption to distribute secret keys",
-       "Encrypting data and decrypting data",
-       "Creating tickets and revoking tickets",
-       "Storing passwords and hashing them"
+       "Encrypting the data and then decrypting the data at the receiver",
+       "Creating the tickets and then revoking the tickets when they expire",
+       "Storing the passwords of users and then hashing them in a database"
       ],
       "a": 0,
       "e": "الجانبان هما توزيع المفاتيح العامة، واستخدام التشفير بالمفتاح العام لتوزيع المفاتيح السرية."
@@ -6777,9 +6777,9 @@ const CHAPTERS = [
       "q": "What can a forger do until A discovers the forgery?",
       "o": [
        "Read messages intended for A and use the forged keys for authentication",
-       "Change the CA private key",
-       "Revoke all certificates",
-       "Delete the Kerberos database"
+       "Change the private key of the CA so it signs the forged keys",
+       "Revoke all of the certificates issued to the other users",
+       "Delete the Kerberos database of the realm of user A"
       ],
       "a": 0,
       "e": "بما أن الناس يشفّرون بالمفتاح المزيف، يستطيع المزوّر قراءة الرسائل واستخدام المفاتيح المزيفة للمصادقة."
@@ -6789,8 +6789,8 @@ const CHAPTERS = [
       "o": [
        "The public-key certificate",
        "A longer password",
-       "A session key",
-       "A timestamp"
+       "A new session key",
+       "A fresh timestamp"
       ],
       "a": 0,
       "e": "شهادة المفتاح العام تربط المفتاح بهوية صاحبه وتوقعها جهة موثوقة، فيصعب التزوير."
@@ -6872,9 +6872,9 @@ const CHAPTERS = [
       "q": "What does a public-key certificate contain?",
       "o": [
        "A public key and the identity of its owner, signed by a trusted authority",
-       "A private key and a password",
-       "A session key and a timestamp",
-       "A list of revoked certificates only"
+       "A private key and the password of the owner, signed by the user",
+       "A session key and a timestamp, both issued by the KDC",
+       "A list of revoked certificates only, and nothing else in it"
       ],
       "a": 0,
       "e": "الشهادة تحتوي المفتاح العام وهوية صاحبه وموقّعة من جهة موثوقة. المفتاح الخاص لا يوضع فيها أبدًا."
@@ -7013,9 +7013,9 @@ const CHAPTERS = [
       "q": "X.509 is part of which series of recommendations?",
       "o": [
        "X.500, which defines a directory service",
-       "X.25 network protocols",
-       "RFC 4120",
-       "NIST 800-63"
+       "X.25, which defines network protocols",
+       "RFC 4120, which defines Kerberos",
+       "NIST 800-63, which defines identity"
       ],
       "a": 0,
       "e": "X.509 جزء من سلسلة X.500 التي تعرّف خدمة الدليل."
@@ -7115,9 +7115,9 @@ const CHAPTERS = [
       "q": "What does the Subject Name identify?",
       "o": [
        "The person, device or site the certificate belongs to",
-       "The CA that issued it",
-       "The signature algorithm",
-       "The revocation date"
+       "The CA that issued the certificate to it",
+       "The signature algorithm that is used for it",
+       "The date on which the certificate was revoked"
       ],
       "a": 0,
       "e": "Subject Name اسم صاحب الشهادة. أما الجهة المصدرة فيحددها Issuer Name.",
@@ -7129,9 +7129,9 @@ const CHAPTERS = [
       "q": "What does the Signature field cover?",
       "o": [
        "All the other fields of the certificate",
-       "Only the serial number",
-       "Only the public key",
-       "Only the validity dates"
+       "Only the serial number field",
+       "Only the public key field",
+       "Only the validity period dates"
       ],
       "a": 0,
       "e": "التوقيع يغطي كل حقول الشهادة الأخرى، ويثبت أنها أصلية ولم يُعبث بها."
@@ -7244,9 +7244,9 @@ const CHAPTERS = [
       "q": "Why can certificates be stored in a directory without special protection?",
       "o": [
        "Because they cannot be forged or modified without detection",
-       "Because they are encrypted with a session key",
-       "Because they are never used",
-       "Because the directory is always secure"
+       "Because they are encrypted with a session key in the directory",
+       "Because they are never used after they are issued to users",
+       "Because the directory is always secure against all attackers"
       ],
       "a": 0,
       "e": "الشهادة موقّعة من الـ CA، فأي تعديل يُكتشف، ولذلك لا يحتاج الدليل لحماية خاصة."
@@ -7269,9 +7269,9 @@ const CHAPTERS = [
       "q": "Why may many CAs be more practical than one?",
       "o": [
        "In a large community, not all users can practically subscribe to the same CA",
-       "Because one CA cannot sign anything",
-       "Because certificates expire sooner",
-       "Because RSA is limited"
+       "Because one CA cannot sign anything for users outside its own country",
+       "Because certificates from one CA expire sooner than those from many CAs",
+       "Because RSA is limited to a small number of certificates for each CA"
       ],
       "a": 0,
       "e": "في المجتمع الكبير يصعب أن يشترك الجميع في CA واحدة، فتكون عدة CAs أكثر عملية، وكل CA تعطي مفتاحها العام لجزء من المستخدمين بأمان."
@@ -7383,9 +7383,9 @@ const CHAPTERS = [
       "q": "What does a CRL list?",
       "o": [
        "Certificates that have been revoked but have not yet expired",
-       "All valid certificates",
-       "Only expired certificates",
-       "All CA private keys"
+       "All the valid certificates issued by the CA",
+       "Only the certificates that have already expired",
+       "All the private keys of the certificate authorities"
       ],
       "a": 0,
       "e": "الـ CRL قائمة بالشهادات الملغاة التي لم تنتهِ مدتها بعد."
@@ -7405,9 +7405,9 @@ const CHAPTERS = [
       "q": "Why would a user keep a local cache of certificates and revocation lists?",
       "o": [
        "To avoid delays and costs of directory searches",
-       "To change certificates locally",
-       "To replace the CA",
-       "To avoid verifying signatures"
+       "To change the certificates locally if needed",
+       "To replace the CA in the network completely",
+       "To avoid verifying the signatures of the CA"
       ],
       "a": 0,
       "e": "البحث في الدليل في كل مرة يسبب تأخيرًا وربما تكلفة، فالنسخة المحلية تتفادى ذلك."
@@ -7491,9 +7491,9 @@ const CHAPTERS = [
       "q": "How does version 3 add flexibility?",
       "o": [
        "By allowing optional extensions to be added to the version 2 format",
-       "By deleting the Subject field",
-       "By removing digital signatures",
-       "By switching to symmetric encryption"
+       "By deleting the Subject field from the certificate format",
+       "By removing digital signatures from the certificate",
+       "By switching to symmetric encryption for all certificates"
       ],
       "a": 0,
       "e": "بدل تثبيت حقول جديدة أضاف الإصدار 3 إضافات اختيارية فوق تنسيق الإصدار 2."
@@ -7503,7 +7503,7 @@ const CHAPTERS = [
       "o": [
        "Identifier, criticality indicator, and value",
        "Issuer, subject, and signature",
-       "Version, serial, and validity",
+       "Version, serial number, and validity",
        "Key, ticket, and nonce"
       ],
       "a": 0,
@@ -7513,9 +7513,9 @@ const CHAPTERS = [
       "q": "A critical extension (TRUE) is not recognized by an implementation. What must it do?",
       "o": [
        "Treat the certificate as invalid",
-       "Ignore the extension",
-       "Ask the user",
-       "Revoke the CA"
+       "Ignore the extension and accept the certificate",
+       "Ask the user whether to trust the certificate",
+       "Revoke the CA that issued the certificate"
       ],
       "a": 0,
       "e": "إذا كان المؤشر TRUE ولم يتعرف النظام على الإضافة فيجب اعتبار الشهادة غير صالحة.",
@@ -7607,9 +7607,9 @@ const CHAPTERS = [
       "q": "What is a certificate policy?",
       "o": [
        "A named set of rules saying where and how a certificate can be used",
-       "The certificate expiry date",
-       "The CA private key",
-       "The list of revoked certificates"
+       "The date when the certificate expires and must be renewed",
+       "The private key of the CA that signed the certificate",
+       "The list of certificates that have been revoked by the CA"
       ],
       "a": 0,
       "e": "سياسة الشهادة مجموعة قواعد مسمّاة تحدد استخدام الشهادة لمجتمع أو تطبيق له متطلبات أمنية مشتركة."
@@ -7640,9 +7640,9 @@ const CHAPTERS = [
       "q": "Policy mappings are used only in which kind of certificate?",
       "o": [
        "Certificates for CAs issued by other CAs",
-       "User certificates only",
-       "Revocation lists",
-       "Kerberos tickets"
+       "User certificates only, never CAs",
+       "Certificate revocation lists (CRLs)",
+       "Kerberos tickets from the TGS"
       ],
       "a": 0,
       "e": "ربط السياسات (Policy mappings) يخص شهادات الـ CA التي تصدرها CAs أخرى."
@@ -7745,9 +7745,9 @@ const CHAPTERS = [
       "q": "Why is the subject alternative name important?",
       "o": [
        "Some applications such as email, EDI and IPSec use their own name forms",
-       "It replaces the signature",
-       "It contains the private key",
-       "It sets the certificate version"
+       "It replaces the signature of the CA that issued the certificate",
+       "It contains the private key of the owner of the certificate",
+       "It sets the version number of the X.509 certificate format"
       ],
       "a": 0,
       "e": "هذه التطبيقات تستخدم صيغ أسماء خاصة بها (مثل عنوان البريد)، والاسم البديل يدعمها."
@@ -7881,9 +7881,9 @@ const CHAPTERS = [
       "q": "Why is attacking a Web server dangerous?",
       "o": [
        "It can provide access to other systems in the organization",
-       "It only changes the page design",
-       "It only slows down the browser",
-       "It cannot affect anything else"
+       "It only changes the design of the page for visitors",
+       "It only slows down the browser of the visitors",
+       "It cannot affect anything else in the organization"
       ],
       "a": 0,
       "e": "اختراق خادم الويب قد يكون مدخلًا للوصول إلى باقي أنظمة المؤسسة."
@@ -8018,9 +8018,9 @@ const CHAPTERS = [
       "q": "What is the consequence of a confidentiality threat?",
       "o": [
        "Loss of information and privacy",
-       "Service disruption",
-       "False identity",
-       "Nothing"
+       "Disruption of the service",
+       "A false user identity",
+       "Nothing at all"
       ],
       "a": 0,
       "e": "النتيجة: فقدان المعلومات والخصوصية.",
@@ -8032,9 +8032,9 @@ const CHAPTERS = [
       "q": "Impersonating users is a threat to which type, and what is its countermeasure?",
       "o": [
        "Authentication; cryptographic techniques",
-       "Integrity; checksums",
-       "Confidentiality; Web proxies",
-       "Denial of Service; none"
+       "Integrity; using checksums on the data",
+       "Confidentiality; using Web proxies",
+       "Denial of Service; no countermeasure"
       ],
       "a": 0,
       "e": "انتحال شخصية المستخدم تهديد للتوثيق، والحماية باستخدام تقنيات التشفير."
@@ -8127,9 +8127,9 @@ const CHAPTERS = [
       "q": "TLS evolved from...",
       "o": [
        "Secure Sockets Layer",
-       "Kerberos",
-       "S/MIME",
-       "IP Security"
+       "Kerberos tickets",
+       "S/MIME e-mail",
+       "IP Security (IPsec)"
       ],
       "a": 0,
       "e": "TLS معيار للإنترنت تطور من بروتوكول طبقة المقابس الآمنة SSL."
@@ -8244,9 +8244,9 @@ const CHAPTERS = [
       "q": "What is the Change Cipher Spec Protocol used for?",
       "o": [
        "To announce the switch to using the agreed encryption settings",
-       "To send Web page data",
-       "To route data to the correct address",
-       "To send warning messages"
+       "To send the Web page data to the client after the handshake",
+       "To route the data to the correct address on the network",
+       "To send warning messages when a problem happens in the session"
       ],
       "a": 0,
       "e": "يستخدم للإعلان عن الانتقال إلى استخدام إعدادات التشفير المتفق عليها."
@@ -8366,9 +8366,9 @@ const CHAPTERS = [
       "q": "Why can a session's security parameters be shared across multiple connections?",
       "o": [
        "To avoid negotiating new security parameters for every connection",
-       "To make the connection permanent",
-       "To stop using encryption",
-       "To remove the client"
+       "To make the connection permanent between the client and server",
+       "To stop using encryption on the later connections of the session",
+       "To remove the client from the session after the first connection"
       ],
       "a": 0,
       "e": "لتجنب إعادة التفاوض على معايير أمان جديدة في كل اتصال."
@@ -8377,9 +8377,9 @@ const CHAPTERS = [
       "q": "Which statement matches the file?",
       "o": [
        "A connection is the actual link to exchange data; a session is reusable security parameters",
-       "A session is the actual link; a connection is reusable parameters",
-       "Connection and session are the same",
-       "A session lasts for one message only"
+       "A session is the actual link to exchange data; a connection is reusable security parameters",
+       "A connection and a session are the same thing, with two different names in TLS",
+       "A session lasts for one message only; a connection is kept for the whole day"
       ],
       "a": 0,
       "e": "الكونكشن هو الاتصال الفعلي لتبادل البيانات، والسيشن مجموعة إعدادات الأمان التي يمكن إعادة استخدامها.",
@@ -8483,9 +8483,9 @@ const CHAPTERS = [
       "q": "What does the Cipher Specification define?",
       "o": [
        "The bulk data encryption algorithm and the hash algorithm used for MAC calculation",
-       "The session identifier",
-       "The peer's certificate",
-       "The compression method"
+       "The session identifier chosen by the server to identify an active or resumable session",
+       "The certificate of the peer, an X.509v3 certificate that may be null",
+       "The compression method used to compress data before it is encrypted"
       ],
       "a": 0,
       "e": "مواصفات التشفير تحدد خوارزمية تشفير البيانات وخوارزمية التحقق من سلامتها (MAC) والخصائص الأمنية."
@@ -8494,9 +8494,9 @@ const CHAPTERS = [
       "q": "What does the Resumable Flag indicate?",
       "o": [
        "Whether the session can be reused for new connections without the complete security negotiation again",
-       "Whether the certificate is valid",
-       "Whether data is compressed",
-       "Whether the server is the real server"
+       "Whether the certificate of the server is valid and signed by a trusted certificate authority",
+       "Whether the data in the records is compressed before encryption and before the MAC is added",
+       "Whether the server is the real server that the client wanted to reach during the handshake"
       ],
       "a": 0,
       "e": "علامة إمكانية الاستئناف تحدد ما إذا كان يمكن استخدام الجلسة مرة أخرى دون إعادة التفاوض الأمني بالكامل."
@@ -8614,9 +8614,9 @@ const CHAPTERS = [
       "q": "In CBC mode, what is used as the IV for the next record?",
       "o": [
        "The final ciphertext block of each record",
-       "The master secret",
-       "The session identifier",
-       "The sequence number"
+       "The master secret of the session",
+       "The session identifier of the client",
+       "The sequence number of the record"
       ],
       "a": 0,
       "e": "القيمة الأولى يحددها بروتوكول المصافحة، ثم تستخدم آخر كتلة مشفرة من كل سجل كقيمة بداية للسجل التالي."
@@ -8625,9 +8625,9 @@ const CHAPTERS = [
       "q": "When does the appropriate sequence number reset to zero?",
       "o": [
        "When a Change Cipher Spec message is sent or received",
-       "After every record",
-       "When the session is resumed",
-       "Never"
+       "After every single record that is sent",
+       "When the session is resumed by the client later",
+       "Never, it keeps counting up forever"
       ],
       "a": 0,
       "e": "عند إرسال أو استقبال رسالة تغيير مواصفات التشفير يعاد الرقم المناسب إلى الصفر."
@@ -8719,9 +8719,9 @@ const CHAPTERS = [
       "q": "How is message integrity achieved?",
       "o": [
        "By using a shared secret key to generate a MAC",
-       "By compressing the data",
-       "By sending the data twice",
-       "By using the IP address"
+       "By compressing the data before sending",
+       "By sending the data twice to compare",
+       "By using the IP address of the sender"
       ],
       "a": 0,
       "e": "باستخدام مفتاح سري مشترك لإنشاء رمز التحقق من سلامة الرسالة (MAC)."
@@ -8730,9 +8730,9 @@ const CHAPTERS = [
       "q": "What does message integrity ensure?",
       "o": [
        "Data has not been modified or tampered with during transmission",
-       "Unauthorized users cannot read the data",
-       "The server is always available",
-       "The session can be resumed"
+       "Unauthorized users cannot read the data that is sent",
+       "The server is always available to the clients",
+       "The session can be resumed later by the client"
       ],
       "a": 0,
       "e": "سلامة الرسائل تعني التأكد من أن البيانات لم يتم تغييرها أو التلاعب بها أثناء انتقالها.",
@@ -8815,9 +8815,9 @@ const CHAPTERS = [
       "q": "What happens first to the data we want to send?",
       "o": [
        "It is divided into small parts",
-       "It is encrypted",
-       "A header is added",
-       "A MAC is added"
+       "It is encrypted first",
+       "A header is added first",
+       "A MAC is added first"
       ],
       "a": 0,
       "e": "أول خطوة تقسيم البيانات إلى أجزاء صغيرة لتسهيل التعامل معها."
@@ -8837,9 +8837,9 @@ const CHAPTERS = [
       "q": "What does the code added after compression help with?",
       "o": [
        "Making sure the data has not been tampered with",
-       "Reducing the size",
-       "Choosing the protocol version",
-       "Opening the connection"
+       "Reducing the size of the data before it is sent",
+       "Choosing the protocol version used for the record",
+       "Opening the connection between client and server"
       ],
       "a": 0,
       "e": "تتم إضافة رمز يساعد على التأكد من أن البيانات لم يتم التلاعب بها."
@@ -8848,9 +8848,9 @@ const CHAPTERS = [
       "q": "What is added at the very end?",
       "o": [
        "A header with the data type, size and protocol version",
-       "The MAC",
-       "The compression",
-       "The session identifier"
+       "The MAC of the compressed fragment of the data",
+       "The compression of the whole record with its MAC",
+       "The session identifier of the current connection"
       ],
       "a": 0,
       "e": "في النهاية تتم إضافة ترويسة تحتوي على نوع البيانات وحجمها وإصدار البروتوكول."
@@ -8984,9 +8984,9 @@ const CHAPTERS = [
       "q": "When is the Alert Protocol used?",
       "o": [
        "When a problem occurs in the connection or when it is closed securely",
-       "Only at the start of the connection",
-       "To send Web pages",
-       "To compress data"
+       "Only at the start of the connection, during the handshake",
+       "To send the Web pages from the server to the client",
+       "To compress the data before it is encrypted and sent"
       ],
       "a": 0,
       "e": "يستخدم لإرسال تنبيه عند حدوث مشكلة في الاتصال أو عند إغلاق الاتصال بشكل آمن."
@@ -9082,9 +9082,9 @@ const CHAPTERS = [
       "q": "What are the parameters of the certificate message?",
       "o": [
        "chain of X.509v3 certificates",
-       "hash value",
-       "type, authorities",
-       "parameters, signature"
+       "hash value of messages",
+       "type, list of authorities",
+       "parameters and a signature"
       ],
       "a": 0,
       "e": "certificate: سلسلة شهادات رقمية X.509v3، يعني بطاقة هوية السيرفر ومعها بطاقات الجهات اللي تضمنه."
@@ -9093,9 +9093,9 @@ const CHAPTERS = [
       "q": "What does the server do in server_hello with the options sent by the client?",
       "o": [
        "Picks one of each: one version, one encryption method, one compression method",
-       "Accepts all of them",
-       "Rejects all of them",
-       "Sends them back without choosing"
+       "Accepts all of them and uses them together in the session",
+       "Rejects all of them and closes the connection with an alert",
+       "Sends them back to the client without choosing any of them"
       ],
       "a": 0,
       "e": "السيرفر يرد بنفس الأشياء بس يختار منها واحد واحد."
@@ -9118,9 +9118,9 @@ const CHAPTERS = [
       "q": "What does the finished message contain and why?",
       "o": [
        "A hash value summarizing all messages, compared by both parties to make sure no one tampered with them",
-       "The server's certificate chain",
-       "The session identifier only",
-       "A request to start again"
+       "The certificate chain of the server, sent again so the client can check it after the key exchange",
+       "The session identifier only, which the client stores so that it can resume the session later",
+       "A request to start the handshake again from the beginning because the keys may have changed"
       ],
       "a": 0,
       "e": "finished: ملخص لكل الرسائل اللي صارت، الطرفين يقارنونه عشان يتأكدون ما أحد لعب بالرسائل."
@@ -9245,9 +9245,9 @@ const CHAPTERS = [
       "q": "In Phase 2, what may the server send?",
       "o": [
        "Certificate, key exchange, and request certificate",
-       "Change cipher spec and finished",
-       "Client key exchange",
-       "Certificate verify"
+       "Change cipher spec and the finished message",
+       "Client key exchange and a client certificate",
+       "Certificate verify and the finished message"
       ],
       "a": 0,
       "e": "المرحلة الثانية: السيرفر قد يرسل شهادته وتبادل المفاتيح وطلب الشهادة، ثم يعلن نهاية مرحلة رسائل الترحيب."
@@ -9267,9 +9267,9 @@ const CHAPTERS = [
       "q": "What happens in Phase 4?",
       "o": [
        "Change cipher suite and finish handshake protocol",
-       "The server sends its certificate",
-       "The client offers its methods",
-       "The server requests a certificate"
+       "The server sends its certificate chain",
+       "The client offers its supported methods",
+       "The server requests a client certificate"
       ],
       "a": 0,
       "e": "المرحلة الرابعة: كل طرف يقول للثاني من الحين بنتكلم بالتشفير اللي اتفقنا عليه ويرسل رسالة ختام فيها ملخص لكل اللي صار."
@@ -9378,9 +9378,9 @@ const CHAPTERS = [
       "q": "What does the Client Write IV do?",
       "o": [
        "Helps initialize the encryption process for the client",
-       "Encrypts data sent by the client",
-       "Checks message integrity",
-       "Identifies the session"
+       "Encrypts all of the data that the client sends",
+       "Checks the integrity of each message sent",
+       "Identifies the session so it can be resumed later"
       ],
       "a": 0,
       "e": "قيمة التهيئة الخاصة بالعميل تُستخدم لبدء عملية التشفير لدى العميل."
@@ -9389,9 +9389,9 @@ const CHAPTERS = [
       "q": "How are these values generated?",
       "o": [
        "By applying hash functions to produce enough secure bytes",
-       "By the user typing them",
-       "By the Alert Protocol",
-       "By sending them in plaintext"
+       "By the user typing them in when logging in",
+       "By the Alert Protocol after an error happens",
+       "By sending them in plaintext to both sides"
       ],
       "a": 0,
       "e": "تُنشأ هذه القيم باستخدام دوال تجزئة (دوال رياضية خاصة) تنتج عددًا كافيًا من البايتات الآمنة."
@@ -9494,9 +9494,9 @@ const CHAPTERS = [
       "q": "What is the job of P_hash?",
       "o": [
        "To take a small secret and produce a large amount of random data used as encryption keys",
-       "To compress the data",
-       "To send alerts",
-       "To verify the server certificate"
+       "To compress the data of each record before it is encrypted with the session keys",
+       "To send alert messages when a problem happens during the connection or the handshake",
+       "To verify the certificate of the server using the public key of the certificate authority"
       ],
       "a": 0,
       "e": "وظيفتها إنها تاخذ سر صغير وتطلع منه كمية كبيرة من البيانات العشوائية نستخدمها كمفاتيح تشفير."
@@ -9516,9 +9516,9 @@ const CHAPTERS = [
       "q": "What is an example of the seed?",
       "o": [
        "The random numbers exchanged during the handshake",
-       "The master secret",
+       "The master secret itself",
        "The server's private key",
-       "The user's password"
+       "The user's own password"
       ],
       "a": 0,
       "e": "البذرة بيانات معروفة زي الأرقام العشوائية اللي تبادلوها وقت المصافحة.",
@@ -9530,9 +9530,9 @@ const CHAPTERS = [
       "q": "What do the three dots in the figure mean?",
       "o": [
        "The process continues as needed",
-       "The process stops",
-       "An error occurred",
-       "The key is complete"
+       "The process stops here",
+       "An error has occurred",
+       "The key is now complete"
       ],
       "a": 0,
       "e": "النقاط الثلاث في الصورة تعني إنها تكمل على حسب الحاجة."
@@ -9642,9 +9642,9 @@ const CHAPTERS = [
       "q": "An attacker exploits weaknesses in how data is encrypted or compressed to infer its content. Which category?",
       "o": [
        "Attacks on the record and application data protocols",
-       "Attacks on the PKI",
-       "Attacks on the handshake protocol",
-       "Other attacks"
+       "Attacks on the public key infrastructure (PKI)",
+       "Attacks on the handshake protocol messages",
+       "Other attacks, such as denial of service on TLS"
       ],
       "a": 0,
       "e": "الفئة الثانية: هجمات على طبقة السجلات وبيانات التطبيق."
@@ -9835,9 +9835,9 @@ const CHAPTERS = [
       "q": "At the HTTP level, how does the client request a connection?",
       "o": [
        "By sending a connection request to the lower layer",
-       "By sending a closure alert",
-       "By sending a certificate",
-       "By opening an SSH channel"
+       "By sending a closure alert to the server",
+       "By sending its certificate to the server",
+       "By opening an SSH channel to the server"
       ],
       "a": 0,
       "e": "مستوى صفحات الويب: يطلب العميل الاتصال بإرسال طلب اتصال إلى الطبقة الأدنى."
@@ -9846,9 +9846,9 @@ const CHAPTERS = [
       "q": "At the transport level, the next lower layer is usually...",
       "o": [
        "TCP, but it may also be TLS or SSL",
-       "Only IP",
-       "Only HTTP",
-       "Only SSH"
+       "Only IP, never TCP or TLS",
+       "Only HTTP, at the same layer",
+       "Only SSH, used for secure links"
       ],
       "a": 0,
       "e": "عادة تكون الطبقة الأدنى TCP وقد تكون TLS أو SSL في بعض الحالات."
@@ -9975,9 +9975,9 @@ const CHAPTERS = [
       "q": "What is an incomplete close?",
       "o": [
        "Sending a closure alert and closing without waiting for the peer's own closure alert",
-       "Closing after both closure alerts are exchanged",
-       "Never closing the connection",
-       "Closing only HTTP"
+       "Closing only after both of the closure alerts have been exchanged by the peers",
+       "Never closing the connection, so it stays open until the network fails",
+       "Closing only the HTTP connection while the TLS session remains fully open"
       ],
       "a": 0,
       "e": "الإغلاق غير المكتمل: إرسال تنبيه الإغلاق ثم إنهاء الاتصال دون انتظار تنبيه الطرف الآخر."
@@ -10055,9 +10055,9 @@ const CHAPTERS = [
       "q": "What does SSH make communication between devices over a network?",
       "o": [
        "Secure and encrypted",
-       "Faster only",
-       "Unencrypted",
-       "Wireless"
+       "Faster only, not safer",
+       "Unencrypted and open",
+       "Wireless only, not wired"
       ],
       "a": 0,
       "e": "SSH بروتوكول يخلي الاتصال بين الأجهزة عبر الشبكة آمن ومشفّر."
@@ -10077,9 +10077,9 @@ const CHAPTERS = [
       "q": "What did the first version of SSH replace?",
       "o": [
        "TELNET and other old methods that sent data openly",
-       "TLS",
-       "HTTPS",
-       "Kerberos"
+       "TLS and SSL protocols used for the web",
+       "HTTPS connections to web servers",
+       "Kerberos for authenticating users"
       ],
       "a": 0,
       "e": "الإصدار الأول انعمل عشان يكون بديل لبرنامج تلنت والطرق القديمة اللي كانت ترسل البيانات مكشوفة."
@@ -10088,9 +10088,9 @@ const CHAPTERS = [
       "q": "What did the second version of SSH do?",
       "o": [
        "Fixed several security vulnerabilities found in the first one",
-       "Removed encryption",
-       "Replaced TCP",
-       "Made SSH expensive"
+       "Removed the encryption to make SSH faster for users",
+       "Replaced TCP with its own new transport protocol",
+       "Made SSH expensive to license and to use at work"
       ],
       "a": 0,
       "e": "الإصدار الثاني جا يصلّح عدة ثغرات أمنية كانت في الأول."
@@ -10173,9 +10173,9 @@ const CHAPTERS = [
       "q": "Which of these is a use of SSH?",
       "o": [
        "Remote login, file transfer and email communication",
-       "Issuing digital certificates",
-       "Routing IP packets",
-       "Generating CRLs"
+       "Issuing digital certificates to the servers",
+       "Routing IP packets between the networks",
+       "Generating certificate revocation lists"
       ],
       "a": 0,
       "e": "يُستخدم للدخول على الأجهزة عن بعد ونقل الملفات والتواصل بالبريد الإلكتروني."
@@ -10184,9 +10184,9 @@ const CHAPTERS = [
       "q": "What is the most important concept of SSH?",
       "o": [
        "It builds an encrypted tunnel between your device and the remote device",
-       "It replaces TCP",
-       "It sends passwords openly",
-       "It only works locally"
+       "It replaces TCP as the transport layer of the network",
+       "It sends passwords openly so that the server can check them",
+       "It only works locally, on the same computer as the server"
       ],
       "a": 0,
       "e": "أهم مفهوم إن SSH يبني نفق مشفّر بين جهازك والجهاز البعيد."
@@ -10195,9 +10195,9 @@ const CHAPTERS = [
       "q": "What is protected inside the SSH tunnel?",
       "o": [
        "Everything: commands, files or passwords",
-       "Only commands",
-       "Only files",
-       "Nothing"
+       "Only the commands typed by the user",
+       "Only the files that are sent across",
+       "Nothing, only the login is protected"
       ],
       "a": 0,
       "e": "كل شي يمر من خلاله سواء أوامر أو ملفات أو كلمات مرور يكون محمي."
@@ -10296,8 +10296,8 @@ const CHAPTERS = [
       "o": [
        "The user authentication protocol",
        "The connection protocol",
-       "TCP",
-       "IP"
+       "The TCP transport protocol",
+       "The IP network protocol"
       ],
       "a": 0,
       "e": "بروتوكول التحقق من المستخدم يثبت للسيرفر مين المستخدم اللي داخل، مثلًا بكلمة مرور أو مفتاح."
@@ -10306,9 +10306,9 @@ const CHAPTERS = [
       "q": "What does the connection protocol do?",
       "o": [
        "Divides the single encrypted tunnel into several channels",
-       "Proves the server's identity",
-       "Delivers packets across networks",
-       "Compresses the data"
+       "Proves the identity of the server to the client",
+       "Delivers the packets across the different networks",
+       "Compresses the data before it is encrypted"
       ],
       "a": 0,
       "e": "بروتوكول الاتصال ياخذ النفق المشفّر الواحد ويقسمه لعدة قنوات."
@@ -10399,9 +10399,9 @@ const CHAPTERS = [
       "q": "How does the server prove its identity at the transport layer?",
       "o": [
        "Using a key pair: one public and one private secret key",
-       "Using the user's password",
-       "Using a session cookie",
-       "Using its IP address only"
+       "Using the password of the user that is logging in",
+       "Using a session cookie stored in the client’s browser",
+       "Using its IP address only, which the client checks"
       ],
       "a": 0,
       "e": "السيرفر يثبت هويته باستخدام مفتاحين: واحد عام وواحد خاص سري."
@@ -10410,9 +10410,9 @@ const CHAPTERS = [
       "q": "Which statement about server keys is correct?",
       "o": [
        "A server may have more than one key, and several servers may share the same key",
-       "Each server must have exactly one unique key",
-       "Keys are chosen by the client",
-       "Servers do not use keys"
+       "Each server must have exactly one unique key that no other server can share",
+       "Keys are chosen by the client and sent to the server at the start of each connection",
+       "Servers do not use keys at all, only the user’s password is checked by the client"
       ],
       "a": 0,
       "e": "ممكن السيرفر يكون عنده أكثر من مفتاح، وممكن أكثر من سيرفر يشتركون في نفس المفتاح."
@@ -10432,9 +10432,9 @@ const CHAPTERS = [
       "q": "What are the two ways the client verifies the server key?",
       "o": [
        "A local database linking server names to keys, or a trusted Certificate Authority",
-       "Asking the user or guessing",
-       "Using DES or AES",
-       "Checking the port or the IP"
+       "Asking the user to type the key, or guessing the key from the server name",
+       "Using the DES cipher, or using the AES cipher with the session key",
+       "Checking the port number of the server, or checking its IP address"
       ],
       "a": 0,
       "e": "يا إنه يكون عنده سجل في جهازه فيه اسم كل سيرفر ومفتاحه، يا إنه يعتمد على جهة موثوقة تضمن المفتاح."
@@ -10507,9 +10507,9 @@ const CHAPTERS = [
       "q": "What happens right after the user's device connects to the server?",
       "o": [
        "The two parties exchange information about the software versions",
-       "The user requests the service",
-       "They confirm the new keys",
-       "They open a channel"
+       "The user requests the service that it wants to use",
+       "They confirm the new keys with each other first",
+       "They open a channel for the transfer of the data"
       ],
       "a": 0,
       "e": "يتصل جهاز المستخدم بالخادم ثم يتبادل الطرفان معلومات عن إصدار البرامج."
@@ -10540,9 +10540,9 @@ const CHAPTERS = [
       "q": "What is the last step?",
       "o": [
        "The user starts requesting the service they want",
-       "Exchanging version information",
-       "Agreeing on encryption",
-       "Creating the keys"
+       "Exchanging the version information first",
+       "Agreeing on the encryption algorithms",
+       "Creating the keys for the session"
       ],
       "a": 0,
       "e": "وأخيرًا يبدأ المستخدم بطلب الخدمة التي يريدها."
@@ -10636,9 +10636,9 @@ const CHAPTERS = [
       "q": "What is the first thing done to the original data?",
       "o": [
        "It is compressed to reduce its size",
-       "It is encrypted",
-       "A code is created",
-       "It is sent"
+       "It is encrypted first of all",
+       "A code is created for it first",
+       "It is sent immediately as it is"
       ],
       "a": 0,
       "e": "تبدأ العملية بالبيانات الأصلية ثم يتم ضغطها لتقليل حجمها."
@@ -10669,9 +10669,9 @@ const CHAPTERS = [
       "q": "What is the code created for?",
       "o": [
        "To verify data integrity and detect any modification",
-       "To compress the data",
-       "To complete the packet size",
-       "To open a channel"
+       "To compress the data before it is encrypted",
+       "To complete the packet to the required size",
+       "To open a channel for the data transfer"
       ],
       "a": 0,
       "e": "يُنشأ رمز للتحقق من سلامة البيانات واكتشاف أي تعديل عليها."
@@ -10680,9 +10680,9 @@ const CHAPTERS = [
       "q": "Which order is correct?",
       "o": [
        "Compress, add extra data, encrypt and create the code, ready to send",
-       "Encrypt, compress, add extra data, send",
-       "Add extra data, send, compress, encrypt",
-       "Create the code, compress, encrypt, add extra data"
+       "Encrypt, compress, add extra data, create the code, then send it",
+       "Add extra data, send it, then compress and encrypt the packet",
+       "Create the code, compress, encrypt, then add extra data to send"
       ],
       "a": 0,
       "e": "الترتيب: ضغط، ثم إضافة بيانات لاستكمال الحجم، ثم تشفير وإنشاء رمز التحقق، ثم تصبح جاهزة للإرسال."
@@ -10748,9 +10748,9 @@ const CHAPTERS = [
       "q": "In public key authentication, what does the client send with its public key?",
       "o": [
        "A signature created using the client's private key",
-       "Its password",
-       "The server's key",
-       "A certificate request"
+       "Its password, typed in by the user",
+       "The public key of the server",
+       "A certificate request for the CA"
       ],
       "a": 0,
       "e": "يرسل العميل مفتاحه العام مع توقيع تم إنشاؤه باستخدام مفتاحه الخاص."
@@ -10759,9 +10759,9 @@ const CHAPTERS = [
       "q": "In password authentication, how is the password protected?",
       "o": [
        "By encryption during transmission",
-       "It is not protected",
-       "By compression",
-       "By a channel number"
+       "It is not protected at all",
+       "By compression of the packet",
+       "By a channel number in SSH"
       ],
       "a": 0,
       "e": "كلمة المرور تكون محمية بالتشفير أثناء الإرسال."
@@ -10781,9 +10781,9 @@ const CHAPTERS = [
       "q": "In host-based authentication, what does the client's computer send?",
       "o": [
        "A signature created using its private key",
-       "The user's password",
-       "Its public key only",
-       "A closure alert"
+       "The password typed by the user",
+       "Its public key only, no signature",
+       "A closure alert message to the server"
       ],
       "a": 0,
       "e": "يرسل جهاز العميل توقيعًا تم إنشاؤه باستخدام مفتاحه الخاص."
@@ -10861,9 +10861,9 @@ const CHAPTERS = [
       "q": "The Connection Protocol operates on top of...",
       "o": [
        "The SSH Transport Layer Protocol",
-       "HTTP",
-       "The Alert Protocol",
-       "The Record Protocol"
+       "The HTTP web protocol",
+       "The TLS Alert Protocol",
+       "The TLS Record Protocol"
       ],
       "a": 0,
       "e": "يعمل فوق طبقة النقل الآمن ويستخدم الاتصال الآمن الذي تم إنشاؤه."
@@ -10872,9 +10872,9 @@ const CHAPTERS = [
       "q": "What does this protocol allow?",
       "o": [
        "Dividing a single connection into multiple logical channels",
-       "Replacing TCP",
-       "Issuing certificates",
-       "Choosing the cipher"
+       "Replacing TCP with a new transport protocol",
+       "Issuing certificates to all of the users",
+       "Choosing the cipher to use for the session"
       ],
       "a": 0,
       "e": "يسمح بتقسيم الاتصال الواحد إلى عدة قنوات منطقية."
@@ -10905,9 +10905,9 @@ const CHAPTERS = [
       "q": "What are the three stages of each channel?",
       "o": [
        "Opening the channel, transferring data, closing the channel",
-       "Handshake, record, alert",
-       "Compress, encrypt, send",
-       "Request, verify, allow"
+       "Handshake, record exchange, then the alert",
+       "Compress, encrypt, then send the data",
+       "Request, verify, then allow the access"
       ],
       "a": 0,
       "e": "تمر كل قناة بثلاث مراحل: فتح القناة ثم نقل البيانات ثم إغلاق القناة."
@@ -10998,9 +10998,9 @@ const CHAPTERS = [
       "q": "How does the server confirm opening the channel?",
       "o": [
        "SSH_MSG_CHANNEL_OPEN_CONFIRMATION",
-       "SSH_MSG_CHANNEL_OPEN",
-       "SSH_MSG_CHANNEL_CLOSE",
-       "SSH_MSG_CHANNEL_DATA"
+       "SSH_MSG_CHANNEL_OPEN (request)",
+       "SSH_MSG_CHANNEL_CLOSE (close)",
+       "SSH_MSG_CHANNEL_DATA (data)"
       ],
       "a": 0,
       "e": "السيرفر يرد برسالة SSH_MSG_CHANNEL_OPEN_CONFIRMATION لتأكيد فتح القناة.",
@@ -11023,9 +11023,9 @@ const CHAPTERS = [
       "q": "What is established before opening a channel?",
       "o": [
        "A secure connection between the client and the server using SSH",
-       "A TLS session",
-       "A Kerberos ticket",
-       "Nothing"
+       "A TLS session between the client and the web server",
+       "A Kerberos ticket from the ticket-granting server",
+       "Nothing, the channels are opened directly"
       ],
       "a": 0,
       "e": "في البداية يتم إنشاء اتصال آمن بين الكلاينت والسيرفر باستخدام بروتوكول SSH."
