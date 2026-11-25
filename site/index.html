@@ -1970,7 +1970,23 @@ html[data-ui="en"] .morewrap .menu.more{left:auto;right:0;transform-origin:top r
 .menu.more .mrow{padding:.3rem .3rem}
 .menu.more .mnote{margin:.5rem .3rem .2rem;font-size:.72rem;line-height:1.6;color:var(--muted)}
 </style>
-<style>
+<script id="zreturn-js">
+/* back to «التدريب التعاوني» or «مساري المهني» once the student has registered (only these two pages, within 30 minutes) */
+(() => {
+  const K = 'study-return-v1', PAGES = ['coop.html', 'career.html'];
+  const go = () => {
+    let r = null, u = null;
+    try { r = JSON.parse(localStorage.getItem(K) || 'null'); u = JSON.parse(localStorage.getItem('study-user-v1') || 'null'); } catch (e) { return true; }
+    if (!r || !PAGES.includes(r.p) || !(Date.now() - r.t < 1800000)) { try { if (r) localStorage.removeItem(K); } catch (e) {} return true; }
+    if (u && /^[A-Za-z0-9_-]{22}$/.test(u.id || '') && typeof u.name === 'string' && u.name.trim().length >= 2) {
+      try { localStorage.removeItem(K); } catch (e) {}
+      location.replace(r.p); return true;
+    }
+    return false;
+  };
+  if (!go()) { const t = setInterval(() => { if (go()) clearInterval(t); }, 700); }
+})();
+</script><style>
 .rpcard{margin:1rem 0;padding:1rem 1.1rem;border-radius:22px;border:1px solid color-mix(in srgb,var(--ok) 35%,var(--line));background:radial-gradient(120% 120% at 100% 0%,color-mix(in srgb,var(--ok) 12%,transparent),transparent 60%),var(--surface);box-shadow:0 1px 2px rgba(20,22,60,.04),0 14px 30px -18px color-mix(in srgb,var(--ok) 45%,transparent)}
 .rpt{display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem}.rpt h2{font-size:1.05rem;margin:0}
 .rpic{display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:12px;background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}.rpic svg{width:1.25rem;height:1.25rem}

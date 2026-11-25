@@ -294,7 +294,45 @@ footer{margin-top:50px;text-align:center;color:var(--muted);font-size:.85rem}
 .qzend{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 @media (max-width:560px){.qzc{padding:20px 18px}.qzgo,.qzgo .btn{width:100%}.qzbox{padding:22px 16px 18px}.qzq{font-size:1.05rem}.qzo button{padding:12px}}
 </style>
-</head>
+<style id="zgate-css">
+#zgate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:1.2rem;background:rgba(14,14,40,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-family:inherit}
+#zgate .zg{width:min(26rem,100%);background:#fff;color:#17163f;border-radius:22px;padding:1.8rem 1.5rem 1.5rem;text-align:center;box-shadow:0 30px 80px -30px rgba(20,15,80,.6)}
+#zgate .zgi{width:4rem;height:4rem;margin:0 auto .9rem;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,#6a5af9,#22c3e6);color:#fff}
+#zgate .zgi svg{width:2rem;height:2rem}
+#zgate h2{margin:0 0 .5rem;font-size:1.3rem;line-height:1.4}
+#zgate p{margin:0 0 1.2rem;color:#56558a;font-size:.95rem;line-height:1.8}
+#zgate a.zgb{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1rem;border-radius:14px;background:linear-gradient(135deg,#5b4bf5,#3a8bf0);color:#fff;font-weight:700;text-decoration:none;font-size:1rem}
+#zgate a.zgb:focus-visible{outline:3px solid #22c3e6;outline-offset:3px}
+#zgate small{display:block;margin-top:.8rem;color:#8a89ad;font-size:.8rem}
+html.zgated,html.zgated body{overflow:hidden!important}
+@media (prefers-color-scheme:dark){#zgate .zg{background:#1b1a3a;color:#f1f0ff}#zgate p{color:#b9b8dc}}
+</style>
+<script id="zgate-js">
+/* registered students only: no platform account on this device -> register on Zubda first, then come back here */
+(() => {
+  let u = null; try { u = JSON.parse(localStorage.getItem('study-user-v1') || 'null'); } catch (e) {}
+  const ok = u && /^[A-Za-z0-9_-]{22}$/.test(u.id || '') && typeof u.name === 'string' && u.name.trim().length >= 2;
+  if (ok) return;
+  const PAGE = 'career.html', TITLE = 'مساري المهني';
+  const show = () => {
+    if (document.getElementById('zgate')) return;
+    document.documentElement.classList.add('zgated');
+    const g = document.createElement('div'); g.id = 'zgate'; g.dir = 'rtl'; g.lang = 'ar';
+    g.innerHTML = `<div class="zg" role="dialog" aria-modal="true" aria-labelledby="zgate-h">
+      <div class="zgi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+      <h2 id="zgate-h">${TITLE} للطلاب المسجلين في زبدة</h2>
+      <p>سجّل اسمك في المنصة أول، ياخذ ثواني، وترجع لهالصفحة تلقائيًا.</p>
+      <a class="zgb" href="index.html" id="zgate-go">سجّل في زبدة</a>
+      <small>التسجيل بالاسم بس، بدون إيميل أو رقم جوال.</small></div>`;
+    document.body.appendChild(g);
+    g.querySelector('#zgate-go').addEventListener('click', () => { try { localStorage.setItem('study-return-v1', JSON.stringify({ p: PAGE, t: Date.now() })); } catch (e) {} });
+    // keep the page behind out of reach of the keyboard
+    document.querySelectorAll('body > *:not(#zgate)').forEach(el => { try { el.inert = true; } catch (e) {} el.setAttribute('aria-hidden', 'true'); });
+    g.querySelector('#zgate-go').focus();
+  };
+  if (document.body) show(); else document.addEventListener('DOMContentLoaded', show);
+})();
+</script></head>
 <body>
 <header class="top"><div class="in">
   <a class="back" href="index.html" aria-label="الرجوع إلى زبدة"><span aria-hidden="true">→</span> <b>زبدة</b></a>
@@ -709,5 +747,45 @@ document.addEventListener('keydown', e => {
   if (/^[1-4]$/.test(e.key) && QI < QZN) { const b = $$('.qzo button')[+e.key - 1]; if (b) b.click(); }
 });
 </script>
-</body>
+<script id="career-track">
+/* visits and reading time for the admin page (study/people/<id>/c/career): only for a student who already has a platform id */
+(() => {
+  let id = '';
+  try { const u = JSON.parse(localStorage.getItem('study-user-v1') || 'null') || {}; if (u.banned === true) return; id = u.id || ''; } catch (e) {}
+  if (!/^[A-Za-z0-9_-]{22}$/.test(id)) return;
+  const DB = 'https://footba-2993c-default-rtdb.firebaseio.com/study';
+  const base = `people/${id}/c/career`, NOW = { '.sv': 'timestamp' }, INC = n => ({ '.sv': { increment: n } }), FK = 'study-career-track-v1';
+  let flags = {}; try { flags = JSON.parse(localStorage.getItem(FK) || '{}') || {}; } catch (e) {}
+  const keep = () => { try { localStorage.setItem(FK, JSON.stringify(flags)); } catch (e) {} };
+  const send = (u, late) => fetch(`${DB}/.json`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, referrerPolicy: 'no-referrer', keepalive: !!late, body: JSON.stringify(u) })
+    .then(r => (r.ok ? 'ok' : r.status === 401 || r.status === 403 ? 'denied' : 'error')).catch(() => 'error');
+  (async () => {
+    const u = { [`${base}/last`]: NOW, [`${base}/visits`]: INC(1) };
+    if (!flags.first) u[`${base}/first`] = NOW;
+    let r = await send(u);
+    if (r === 'denied' && !flags.first) { delete u[`${base}/first`]; r = await send(u); }
+    if (r === 'ok' && !flags.first) { flags.first = 1; keep(); }
+  })();
+  const PARTS = [['whichpath', 'ch1'], ['advisor', 'ch2'], ['paths', 'ch3'], ['levels', 'ch4'], ['certs', 'ch5'], ['tools', 'ch6'], ['hadaf', 'ch7'], ['src', 'ch8']];
+  const acc = {}; let lastAct = Date.now();
+  ['scroll', 'pointerdown', 'keydown', 'touchstart', 'mousemove'].forEach(ev => addEventListener(ev, () => { lastAct = Date.now(); }, { passive: true }));
+  setInterval(() => {
+    if (document.visibilityState !== 'visible' || Date.now() - lastAct > 120000) return;
+    const y = innerHeight * 0.4;
+    for (const [sid, ch] of PARTS) {
+      const el = document.getElementById(sid); if (!el) continue;
+      const r = el.getBoundingClientRect();
+      if (r.top <= y && r.bottom > y) { acc[ch] = (acc[ch] || 0) + 1; break; }
+    }
+  }, 1000);
+  function flush(late) {
+    const u = {};
+    Object.keys(acc).forEach(ch => { const n = Math.min(300, acc[ch]); if (n > 0) u[`${base}/sec/${ch}`] = INC(n); acc[ch] -= n; if (acc[ch] <= 0) delete acc[ch]; });
+    if (Object.keys(u).length) { u[`${base}/last`] = NOW; send(u, late); }
+  }
+  setInterval(() => flush(false), 45000);
+  addEventListener('pagehide', () => flush(true));
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(true); });
+})();
+</script></body>
 </html>
